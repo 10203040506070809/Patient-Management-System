@@ -19,7 +19,7 @@ public class PatientClass extends PersonClass {
 public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines)
 {
     //calls super class 
-   
+  
 this.username = username;
 this.password = password;
 this.name = name;
