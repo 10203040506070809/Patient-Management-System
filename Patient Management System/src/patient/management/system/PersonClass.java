@@ -13,7 +13,7 @@ public class PersonClass {
     protected String username;
     protected String password;
     protected String name;
-    public String role;
+    
     public String getUsername() {
         return username;
     }
@@ -38,13 +38,6 @@ public class PersonClass {
         this.name = name;
     }
     
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
     @Override
 public String toString(){
    
