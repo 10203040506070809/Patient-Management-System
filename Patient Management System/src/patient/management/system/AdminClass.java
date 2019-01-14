@@ -13,7 +13,7 @@ public class AdminClass extends PersonClass{
     public AdminClass(String username, String password, String name)
 {
     //calls super class 
-    super(username, password, name);
+    
 this.username = username;
 this.password = password;
 this.name = name;

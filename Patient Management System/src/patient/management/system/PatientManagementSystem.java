@@ -10,12 +10,15 @@ package patient.management.system;
  * @author jflet
  */
 public class PatientManagementSystem {
+        
 
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+       
     }
     
 }

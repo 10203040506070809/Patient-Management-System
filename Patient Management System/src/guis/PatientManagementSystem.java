@@ -4,22 +4,174 @@
  * and open the template in the editor.
  */
 package guis;
-
+import java.util.*;
+import javax.swing.DefaultListModel;
+import patient.management.system.*;
 /**
  *
  * @author jflet
  */
 public class PatientManagementSystem extends javax.swing.JFrame {
-
+    
+    List<PatientClass> patients = new ArrayList<PatientClass>();
+    List<DoctorClass> doctors = new ArrayList<DoctorClass>();
+    List<AdminClass> admins = new ArrayList<AdminClass>();
+    List<SecretaryClass> secretarys = new ArrayList<SecretaryClass>();
+    DefaultListModel model = new DefaultListModel();
+PatientClass patient;
+ DoctorClass doctor;
+ AdminClass admin;
+ SecretaryClass secretary;
+ 
+ 
     /**
      * Creates new form PatientManagementSystem
      */
     public PatientManagementSystem() {
+      
         initComponents();
-    }
+        patientApprovalList.setModel(model);
+logOffButtonOnClick();
 
+
+        
+         PatientClass patient = new PatientClass("P1", "the north", "Jon Snow", 18, "Male", "Suffers with Belly ache", "Belly ache", "Paracetemol, 24mg 2x a day");
+         PatientClass patient2 = new PatientClass("P2", "betrayal", "Robb Stark", 23, "Male", "Suffers with migraines", "Migraines", "Ibruprofen, 24mg 2x a day");
+         PatientClass patient3 = new PatientClass("P3", "joffrey", "Sansa Stark", 15, "Female", "Suffers with Bipolar", "Bipolar", "Xanax, 24mg 1x a day");
+         DoctorClass doctor = new DoctorClass("D1", "the watch" ,"Aemon Targaryen", 5);
+         DoctorClass doctor2 = new DoctorClass("D2", "boar" ,"Robert Baratheon", 2);
+         DoctorClass doctor3 = new DoctorClass("D3", "ironprice" ,"Theon Greyjoy", 1);
+         AdminClass admin = new AdminClass("A1", "king", "Arys Oakheart");
+         SecretaryClass secretary = new SecretaryClass("S1", "needle", "Arya Stark");
+         patients.add(patient);
+         patients.add(patient2);
+         patients.add(patient3);
+        doctors.add(doctor);
+        doctors.add(doctor2);
+        doctors.add(doctor3);
+        admins.add(admin);
+        secretarys.add(secretary);
+    }
+    
+    public void loginButtonOnClick(){
+       
+       String userEntry = usernameText.getText(); 
+       String passEntry = passwordText.getText();
+       String nameEntry = nameText.getText();
+       if (userEntry != null && passEntry != null){
+           try{
+     String selectedRole = roleList.getSelectedValue();
+           
+           
+     switch(selectedRole){
+         
+         case "Patient":
+                  for (int i = 0; i < patients.size(); i++) {
+            //check list for patient
+            //check if patient exists, then check for password
+            //password stored in plaintext, HASH PLS
+            if (patients.get(i).getUsername().equals(userEntry) && patients.get(i).getPassword().equals(passEntry)){
+                  System.out.println((patients.get(i).getName()));
+                                  mainPanel.addTab("Patient", PatientPanel);
+                mainPanel.remove(LoginPanel);
+                  
+                  }
+            else {
+                feedbackLabel.setText("Your username or password is incorrect. Please try again.");}
+                
+            }
+               
+
+    
+
+
+                 //correct login
+                            
+                 break;
+         case "Doctor":
+             
+             //check if doctor exists in system
+                  for (int i = 0; i < doctors.size(); i++) {
+            //check list for patient
+            //check if patient exists, then check for password
+            //password stored in plaintext, HASH PLS
+            if (doctors.get(i).getUsername().equals(userEntry) && doctors.get(i).getPassword().equals(passEntry)){
+                  System.out.println(("Login Successful."));
+             
+                                doctorUserNameBox.setText(usernameText.getText());  
+                                doctorNameBox.setText(nameText.getText());
+                             mainPanel.addTab("Doctor", DoctorPanel);
+                             mainPanel.remove(LoginPanel);}}
+             break;
+                      
+         case "Secretary":
+             //check if secretary exists in system
+                  for (int i = 0; i < secretarys.size(); i++) {
+            //check list for patient
+            //check if patient exists, then check for password
+            //password stored in plaintext, HASH PLS
+            if (secretarys.get(i).getUsername().equals(userEntry) && secretarys.get(i).getPassword().equals(passEntry)){
+                  System.out.println(("Login Successful."));
+             
+               secretaryUserNameBox.setText(usernameText.getText());  
+             secretaryNameBox.setText(nameText.getText());
+                             mainPanel.addTab("Secretary", SecretaryPanel);
+                             mainPanel.remove(LoginPanel);}}
+             break;
+             
+         case "Administrator":
+             //check if admin exists in system
+                  for (int i = 0; i < admins.size(); i++) {
+            //check list for patient
+            //check if patient exists, then check for password
+            //password stored in plaintext, HASH PLS
+            if (admins.get(i).getUsername().equals(userEntry) & admins.get(i).getPassword().equals(passEntry)){
+                  System.out.println(("Login Successful."));
+             
+                            mainPanel.addTab("Admin", AdministrationPanel);
+                                         adminUserNameBox.setText(usernameText.getText());  
+             adminNameBox.setText(nameText.getText());
+             mainPanel.remove(LoginPanel);}
+                  }
+             break;
+         
+     }}    
+     
+     catch(Exception e){
+             feedbackLabel.setText("An error has occured: Make sure you have selected everything., otherwise contact an administrator.");
+             }
+     
+     
+    }
+             
+
+    }
+    public void registerOnClick(){
+if (registerName.getText() != null && registerGenderList.getSelectedValue() != null && registerDobText.getText() != null){
+    //make sure no premade patients have the same ID
+            int counter = 100;
+   PatientClass patient = new PatientClass("A" + counter, registerPassword.getText(), nameText.getText(), Integer.parseInt(registerDobText.getText()), registerGenderList.getSelectedValue(), "", "", "");
+   counter++;
+                 
+        model.addElement(patient);
+    
+}
+     
+    
+        
+    }
+    public void logOffButtonOnClick(){
+                mainPanel.remove(DoctorPanel);
+        mainPanel.remove(PatientPanel);
+        mainPanel.remove(SecretaryPanel);
+        mainPanel.remove(AdministrationPanel);
+        mainPanel.add("Login", LoginPanel);
+    }
+public void approvePatient(){
+patients.add(patient);
+}
     /**
-     * This method is called from within the constructor to initialize the form.
+     * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
@@ -28,7 +180,7 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel = new javax.swing.JTabbedPane();
-        Login = new javax.swing.JPanel();
+        LoginPanel = new javax.swing.JPanel();
         usernameText = new javax.swing.JTextField();
         passwordText = new javax.swing.JTextField();
         loginUserLabel = new javax.swing.JLabel();
@@ -36,25 +188,44 @@ public class PatientManagementSystem extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        roleList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        feedbackLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Doctor = new javax.swing.JPanel();
+        nameText = new javax.swing.JTextField();
+        RegisterPanel = new javax.swing.JPanel();
+        registerButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        registerName = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        registerGenderList = new javax.swing.JList<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        registerDobText = new javax.swing.JTextField();
+        registerPassword = new javax.swing.JPasswordField();
+        DoctorPanel = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         usernameLabel1 = new javax.swing.JLabel();
         doctorUserNameBox = new javax.swing.JTextField();
         nameLabel1 = new javax.swing.JLabel();
         doctorNameBox = new javax.swing.JTextField();
-        Secretary = new javax.swing.JPanel();
+        SecretaryPanel = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         secretaryUserNameBox = new javax.swing.JTextField();
         usernameLabel2 = new javax.swing.JLabel();
         nameLabel2 = new javax.swing.JLabel();
         secretaryNameBox = new javax.swing.JTextField();
-        Administration = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        approvalButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        scriptList = new javax.swing.JList<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        patientApprovalList = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        AdministrationPanel = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
         DoctorText = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -66,7 +237,7 @@ public class PatientManagementSystem extends javax.swing.JFrame {
         usernameLabel3 = new javax.swing.JLabel();
         nameLabel3 = new javax.swing.JLabel();
         adminNameBox = new javax.swing.JTextField();
-        Patient = new javax.swing.JPanel();
+        PatientPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -105,75 +276,158 @@ public class PatientManagementSystem extends javax.swing.JFrame {
         });
 
         registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        roleList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Patient", "Doctor", "Secretary", "Administrator" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(roleList);
 
         jLabel1.setText("Role");
 
-        javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
-        Login.setLayout(LoginLayout);
-        LoginLayout.setHorizontalGroup(
-            LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginLayout.createSequentialGroup()
+        jLabel2.setText("Name");
+
+        javax.swing.GroupLayout LoginPanelLayout = new javax.swing.GroupLayout(LoginPanel);
+        LoginPanel.setLayout(LoginPanelLayout);
+        LoginPanelLayout.setHorizontalGroup(
+            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPanelLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(LoginLayout.createSequentialGroup()
-                        .addComponent(loginButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(LoginLayout.createSequentialGroup()
-                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(registerButton)
-                            .addComponent(loginUserLabel)
-                            .addGroup(LoginLayout.createSequentialGroup()
-                                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(loginPassLabel))
-                                .addGap(55, 55, 55)
-                                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(LoginLayout.createSequentialGroup()
-                .addGap(316, 316, 316)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 940, Short.MAX_VALUE))
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(feedbackLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerButton)
+                    .addComponent(loginUserLabel)
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
+                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameText, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(passwordText, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(loginPassLabel)
+                            .addComponent(loginButton)
+                            .addComponent(jLabel2)
+                            .addComponent(nameText))
+                        .addGap(55, 55, 55)
+                        .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
-        LoginLayout.setVerticalGroup(
-            LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginLayout.createSequentialGroup()
+        LoginPanelLayout.setVerticalGroup(
+            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LoginPanelLayout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(loginUserLabel)
-                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(LoginLayout.createSequentialGroup()
+                .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(17, 17, 17)
+                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(loginPassLabel))
-                    .addGroup(LoginLayout.createSequentialGroup()
+                    .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(28, 28, 28)
+                .addComponent(feedbackLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(loginButton)
                 .addGap(18, 18, 18)
                 .addComponent(registerButton)
-                .addContainerGap(1112, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
-        mainPanel.addTab("Login", Login);
+        mainPanel.addTab("Login", LoginPanel);
+
+        registerButton1.setText("Register");
+        registerButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Greetings new patients, please enter your name, gender, age and select a password to register.");
+
+        registerGenderList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Male", "Female" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(registerGenderList);
+
+        jLabel7.setText("Name");
+
+        jLabel8.setText("Gender");
+
+        jLabel9.setText("Age");
+
+        javax.swing.GroupLayout RegisterPanelLayout = new javax.swing.GroupLayout(RegisterPanel);
+        RegisterPanel.setLayout(RegisterPanelLayout);
+        RegisterPanelLayout.setHorizontalGroup(
+            RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(RegisterPanelLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addComponent(registerName, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(registerDobText, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(registerButton1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel8)
+                            .addComponent(registerPassword))))
+                .addContainerGap(457, Short.MAX_VALUE))
+        );
+        RegisterPanelLayout.setVerticalGroup(
+            RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(registerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(registerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addGap(13, 13, 13)
+                .addComponent(registerDobText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(registerButton1)
+                .addContainerGap(181, Short.MAX_VALUE))
+        );
+
+        mainPanel.addTab("Register", RegisterPanel);
 
         jButton6.setText("Log Off");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         usernameLabel1.setText("Username");
 
@@ -183,51 +437,55 @@ public class PatientManagementSystem extends javax.swing.JFrame {
 
         doctorNameBox.setEditable(false);
 
-        javax.swing.GroupLayout DoctorLayout = new javax.swing.GroupLayout(Doctor);
-        Doctor.setLayout(DoctorLayout);
-        DoctorLayout.setHorizontalGroup(
-            DoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DoctorLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(DoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout DoctorPanelLayout = new javax.swing.GroupLayout(DoctorPanel);
+        DoctorPanel.setLayout(DoctorPanelLayout);
+        DoctorPanelLayout.setHorizontalGroup(
+            DoctorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DoctorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DoctorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usernameLabel1)
                     .addComponent(doctorUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel1)
-                    .addComponent(usernameLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1134, Short.MAX_VALUE)
+                    .addComponent(doctorNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 666, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
-        DoctorLayout.setVerticalGroup(
-            DoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DoctorLayout.createSequentialGroup()
-                .addGroup(DoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DoctorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DoctorLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+        DoctorPanelLayout.setVerticalGroup(
+            DoctorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DoctorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DoctorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DoctorPanelLayout.createSequentialGroup()
                         .addComponent(usernameLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(doctorUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(nameLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(doctorNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1373, Short.MAX_VALUE))
+                        .addComponent(doctorNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(448, Short.MAX_VALUE))
         );
 
-        mainPanel.addTab("Doctor", Doctor);
+        mainPanel.addTab("Doctor", DoctorPanel);
 
         jButton9.setText("Log Off");
-
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane3.setViewportView(jTextArea4);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Available Prescriptions");
 
         secretaryUserNameBox.setEditable(false);
+        secretaryUserNameBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secretaryUserNameBoxActionPerformed(evt);
+            }
+        });
 
         usernameLabel2.setText("Username");
 
@@ -235,52 +493,97 @@ public class PatientManagementSystem extends javax.swing.JFrame {
 
         secretaryNameBox.setEditable(false);
 
-        javax.swing.GroupLayout SecretaryLayout = new javax.swing.GroupLayout(Secretary);
-        Secretary.setLayout(SecretaryLayout);
-        SecretaryLayout.setHorizontalGroup(
-            SecretaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SecretaryLayout.createSequentialGroup()
+        jLabel4.setText("Patients Needing Approval");
+
+        approvalButton.setText("Approve");
+        approvalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approvalButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setViewportView(scriptList);
+
+        patientApprovalList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane6.setViewportView(patientApprovalList);
+
+        jLabel5.setText("Appointment Requests");
+
+        javax.swing.GroupLayout SecretaryPanelLayout = new javax.swing.GroupLayout(SecretaryPanel);
+        SecretaryPanel.setLayout(SecretaryPanelLayout);
+        SecretaryPanelLayout.setHorizontalGroup(
+            SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(SecretaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel2)
-                    .addComponent(usernameLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 428, Short.MAX_VALUE)
-                .addGroup(SecretaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(404, 404, 404)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernameLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameLabel2)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(66, 66, 66)
+                                .addComponent(approvalButton))
+                            .addComponent(jScrollPane6))
+                        .addGap(0, 181, Short.MAX_VALUE))))
         );
-        SecretaryLayout.setVerticalGroup(
-            SecretaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SecretaryLayout.createSequentialGroup()
-                .addGroup(SecretaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SecretaryLayout.createSequentialGroup()
+        SecretaryPanelLayout.setVerticalGroup(
+            SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
+                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SecretaryLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SecretaryLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
                         .addComponent(usernameLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
+                        .addGap(69, 69, 69)
                         .addComponent(nameLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(938, Short.MAX_VALUE))
+                        .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(approvalButton)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
-        mainPanel.addTab("Secretary", Secretary);
+        mainPanel.addTab("Secretary", SecretaryPanel);
 
         jButton12.setText("Log Off");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -290,7 +593,7 @@ public class PatientManagementSystem extends javax.swing.JFrame {
         jTextArea3.setRows(5);
         DoctorText1.setViewportView(jTextArea3);
 
-        SecretaryLabel.setText("Secretary");
+        SecretaryLabel.setText("Secretarys");
 
         DoctorLabel.setText("Doctors");
 
@@ -302,60 +605,65 @@ public class PatientManagementSystem extends javax.swing.JFrame {
 
         adminNameBox.setEditable(false);
 
-        javax.swing.GroupLayout AdministrationLayout = new javax.swing.GroupLayout(Administration);
-        Administration.setLayout(AdministrationLayout);
-        AdministrationLayout.setHorizontalGroup(
-            AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdministrationLayout.createSequentialGroup()
+        javax.swing.GroupLayout AdministrationPanelLayout = new javax.swing.GroupLayout(AdministrationPanel);
+        AdministrationPanel.setLayout(AdministrationPanelLayout);
+        AdministrationPanelLayout.setHorizontalGroup(
+            AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdministrationPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AdministrationLayout.createSequentialGroup()
-                        .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DoctorText, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DoctorLabel))
+                        .addGap(172, 172, 172)
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SecretaryLabel)
+                            .addComponent(DoctorText1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(295, Short.MAX_VALUE))
+                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameLabel3)
                             .addComponent(usernameLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))
-                    .addGroup(AdministrationLayout.createSequentialGroup()
-                        .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DoctorText, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DoctorLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 541, Short.MAX_VALUE)
-                        .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DoctorText1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SecretaryLabel))
-                        .addGap(420, 420, 420))))
+                        .addGap(34, 34, 34))))
         );
-        AdministrationLayout.setVerticalGroup(
-            AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdministrationLayout.createSequentialGroup()
+        AdministrationPanelLayout.setVerticalGroup(
+            AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdministrationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(AdministrationLayout.createSequentialGroup()
+                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
                         .addComponent(usernameLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
                         .addComponent(nameLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49)
-                .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DoctorLabel)
                     .addComponent(SecretaryLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AdministrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DoctorText, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DoctorText1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(673, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DoctorText1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(DoctorText))
+                .addGap(1098, 1098, 1098))
         );
 
-        mainPanel.addTab("Administration", Administration);
+        mainPanel.addTab("Administration", AdministrationPanel);
 
         jButton3.setText("Log Off");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -372,68 +680,69 @@ public class PatientManagementSystem extends javax.swing.JFrame {
 
         usernameLabel.setText("Username");
 
-        jButton1.setText("Delete Account");
+        jButton1.setText("Request Account Termination");
 
-        javax.swing.GroupLayout PatientLayout = new javax.swing.GroupLayout(Patient);
-        Patient.setLayout(PatientLayout);
-        PatientLayout.setHorizontalGroup(
-            PatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PatientLayout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 844, Short.MAX_VALUE)
-                .addGroup(PatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(patientHistoryLabel))
-                .addGap(38, 38, 38))
-            .addGroup(PatientLayout.createSequentialGroup()
+        javax.swing.GroupLayout PatientPanelLayout = new javax.swing.GroupLayout(PatientPanel);
+        PatientPanel.setLayout(PatientPanelLayout);
+        PatientPanelLayout.setHorizontalGroup(
+            PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatientPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(PatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(patientNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(patientUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel)
-                    .addComponent(usernameLabel))
+                    .addComponent(usernameLabel)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(patientHistoryLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(85, 85, 85)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
-        PatientLayout.setVerticalGroup(
-            PatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PatientLayout.createSequentialGroup()
+        PatientPanelLayout.setVerticalGroup(
+            PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatientPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PatientLayout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientLayout.createSequentialGroup()
-                        .addComponent(usernameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(patientUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(nameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(patientNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(PatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PatientLayout.createSequentialGroup()
+                .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PatientPanelLayout.createSequentialGroup()
+                        .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PatientPanelLayout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientPanelLayout.createSequentialGroup()
+                                .addComponent(usernameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(patientUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(nameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(patientNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton1))
+                    .addGroup(PatientPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addComponent(patientHistoryLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
-                .addContainerGap(733, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
-        mainPanel.addTab("Patient", Patient);
+        mainPanel.addTab("Patient", PatientPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         mainPanel.getAccessibleContext().setAccessibleName("mainPanel");
@@ -451,10 +760,52 @@ public class PatientManagementSystem extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        
+        loginButtonOnClick();
         
         
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        logOffButtonOnClick();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+                logOffButtonOnClick();
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+                logOffButtonOnClick();
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+                logOffButtonOnClick();
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void approvalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvalButtonActionPerformed
+        // TODO add your handling code here:
+        approvePatient();
+    }//GEN-LAST:event_approvalButtonActionPerformed
+
+    private void secretaryUserNameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secretaryUserNameBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_secretaryUserNameBoxActionPerformed
+
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void registerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButton1ActionPerformed
+        // TODO add your handling code here:
+        registerOnClick();
+    }//GEN-LAST:event_registerButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -492,19 +843,22 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Administration;
-    private javax.swing.JPanel Doctor;
+    private javax.swing.JPanel AdministrationPanel;
     private javax.swing.JLabel DoctorLabel;
+    private javax.swing.JPanel DoctorPanel;
     private javax.swing.JScrollPane DoctorText;
     private javax.swing.JScrollPane DoctorText1;
-    private javax.swing.JPanel Login;
-    private javax.swing.JPanel Patient;
-    private javax.swing.JPanel Secretary;
+    private javax.swing.JPanel LoginPanel;
+    private javax.swing.JPanel PatientPanel;
+    private javax.swing.JPanel RegisterPanel;
     private javax.swing.JLabel SecretaryLabel;
+    private javax.swing.JPanel SecretaryPanel;
     private javax.swing.JTextField adminNameBox;
     private javax.swing.JTextField adminUserNameBox;
+    private javax.swing.JButton approvalButton;
     private javax.swing.JTextField doctorNameBox;
     private javax.swing.JTextField doctorUserNameBox;
+    private javax.swing.JLabel feedbackLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
@@ -513,14 +867,21 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel loginPassLabel;
     private javax.swing.JLabel loginUserLabel;
@@ -529,11 +890,20 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     private javax.swing.JLabel nameLabel1;
     private javax.swing.JLabel nameLabel2;
     private javax.swing.JLabel nameLabel3;
+    private javax.swing.JTextField nameText;
     private javax.swing.JTextField passwordText;
+    private javax.swing.JList<String> patientApprovalList;
     private javax.swing.JLabel patientHistoryLabel;
     private javax.swing.JTextField patientNameBox;
     private javax.swing.JTextField patientUserNameBox;
     private javax.swing.JButton registerButton;
+    private javax.swing.JButton registerButton1;
+    private javax.swing.JTextField registerDobText;
+    private javax.swing.JList<String> registerGenderList;
+    private javax.swing.JTextField registerName;
+    private javax.swing.JPasswordField registerPassword;
+    private javax.swing.JList<String> roleList;
+    private javax.swing.JList<String> scriptList;
     private javax.swing.JTextField secretaryNameBox;
     private javax.swing.JTextField secretaryUserNameBox;
     private javax.swing.JLabel usernameLabel;

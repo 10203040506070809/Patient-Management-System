@@ -10,12 +10,13 @@ package patient.management.system;
  * @author jflet
  */
 public class DoctorClass extends PersonClass {
-    public DoctorClass(String username, String password, String name)
+    public DoctorClass(String username, String password, String name, int rating)
 {
-    //calls super class 
-    super(username, password, name);
+  
+   
 this.username = username;
 this.password = password;
 this.name = name;
+
 }
 }

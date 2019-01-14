@@ -10,12 +10,38 @@ package patient.management.system;
  * @author jflet
  */    
 public class PatientClass extends PersonClass {
-public PatientClass(String username, String password, String name)
+    
+    protected int age;
+    protected String gender;
+    protected String notes;
+    protected String history;
+    protected String medicines;
+public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines)
 {
     //calls super class 
-    super(username, password, name);
+   
 this.username = username;
 this.password = password;
 this.name = name;
 }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
+
+
 }
