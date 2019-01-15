@@ -883,18 +883,29 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="DoctorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane10" min="-2" pref="132" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="adminDoctorsAddBtn" min="-2" max="-2" attributes="0"/>
-                                          <Component id="adminDoctorsRemovalBtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="adminUserNameBox" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <Component id="nameLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernameLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="adminNameBox" min="-2" pref="108" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButton12" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="adminDoctorRatingLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="DoctorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jScrollPane10" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="adminDoctorsRemovalBtn" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -912,10 +923,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jScrollPane8" min="-2" pref="131" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="adminSecretaryAdditionBtn" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="adminSecretaryRemovalBtn" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="adminSecretaryRemovalBtn" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="adminNewNameText" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
@@ -940,21 +948,6 @@
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="adminUserNameBox" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                                  <Component id="nameLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="usernameLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="adminNameBox" min="-2" pref="108" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton12" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="adminDoctorRatingLabel" min="-2" pref="95" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -1020,15 +1013,11 @@
                               <Component id="adminNameBox" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                      <Component id="adminDoctorsAddBtn" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                       <Component id="adminDoctorsRemovalBtn" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="adminSecretaryAdditionBtn" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                                       <Component id="adminSecretaryRemovalBtn" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1120,28 +1109,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="adminDoctorsAddBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Add"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminDoctorsAddBtnActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="adminDoctorsRemovalBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remove"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminDoctorsRemovalBtnActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="adminSecretaryAdditionBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Add"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminSecretaryAdditionBtnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="adminSecretaryRemovalBtn">

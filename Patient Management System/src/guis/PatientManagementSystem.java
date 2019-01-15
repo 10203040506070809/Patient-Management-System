@@ -23,6 +23,7 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     DefaultListModel ratingList = new DefaultListModel();
     DefaultListModel terminationListModel = new DefaultListModel();
     DefaultListModel adminDoctorListModel = new DefaultListModel();
+    DefaultListModel adminSecretaryListModel = new DefaultListModel();
 PatientClass newPatient;
  DoctorClass doctor;
  AdminClass admin;
@@ -39,6 +40,7 @@ PatientClass newPatient;
         patientDoctorRatingList.setModel(ratingList);
         terminationsList.setModel(terminationListModel);
         adminDoctorList.setModel(adminDoctorListModel);
+        adminSecretaryList.setModel(adminSecretaryListModel);
 logOffButtonOnClick();
 
 
@@ -146,6 +148,10 @@ prescriptionText.setText(patients.get(i).getMedicines());
                 for (int j = 0; j < doctors.size(); j++) {
                                                        adminDoctorListModel.addElement(doctors.get(j).getName());
 
+                }
+                for (int j = 0; j < secretarys.size(); j++) {
+                    
+                    adminSecretaryListModel.addElement(secretarys.get(j).getName());
                 }
                             mainPanel.addTab("Admin", AdministrationPanel);
                                          adminUserNameBox.setText(usernameText.getText());  
@@ -305,12 +311,11 @@ terminationListModel.addElement(currentUserName);
             if (adminDoctorList.getSelectedValue() != null){
             if(doctors.get(i).getName() == adminDoctorList.getSelectedValue()){
                 doctors.remove(i);
+                adminDoctorListModel.removeElement(adminDoctorList.getSelectedValue());
             }
         }}
 }
-    public void addDoctor(){
-        
-    }
+
    public void createAdmin(){
        if (adminNewNameText.getText() != null && adminNewPasswordText.getText() != null &&  adminAccountLister.getSelectedValue() != null){
           
@@ -343,6 +348,17 @@ counter++;
                }
            }
        }
+   }
+   
+
+   public void secretaryRemovalBtn(){
+               for (int i = 0; i < 10; i++) {
+            if (adminSecretaryList.getSelectedValue() != null){
+            if(secretarys.get(i).getName() == adminSecretaryList.getSelectedValue()){
+                secretarys.remove(i);
+                adminSecretaryListModel.removeElement(adminSecretaryList.getSelectedValue());
+            }
+        }}
    }
     /**
      * This method is called from within the constructor to initialise the form.
@@ -434,9 +450,7 @@ counter++;
         adminSecretaryList = new javax.swing.JList<>();
         jScrollPane10 = new javax.swing.JScrollPane();
         adminDoctorList = new javax.swing.JList<>();
-        adminDoctorsAddBtn = new javax.swing.JButton();
         adminDoctorsRemovalBtn = new javax.swing.JButton();
-        adminSecretaryAdditionBtn = new javax.swing.JButton();
         adminSecretaryRemovalBtn = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         adminFeedbackLabel = new javax.swing.JLabel();
@@ -976,24 +990,10 @@ counter++;
         adminDoctorList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane10.setViewportView(adminDoctorList);
 
-        adminDoctorsAddBtn.setText("Add");
-        adminDoctorsAddBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminDoctorsAddBtnActionPerformed(evt);
-            }
-        });
-
         adminDoctorsRemovalBtn.setText("Remove");
         adminDoctorsRemovalBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adminDoctorsRemovalBtnActionPerformed(evt);
-            }
-        });
-
-        adminSecretaryAdditionBtn.setText("Add");
-        adminSecretaryAdditionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminSecretaryAdditionBtnActionPerformed(evt);
             }
         });
 
@@ -1043,14 +1043,23 @@ counter++;
                 .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdministrationPanelLayout.createSequentialGroup()
                         .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DoctorLabel)
-                            .addGroup(AdministrationPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(adminDoctorsAddBtn)
-                                    .addComponent(adminDoctorsRemovalBtn)))
-                            .addComponent(jButton4))
+                            .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLabel3)
+                            .addComponent(usernameLabel3)
+                            .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(adminDoctorRatingLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(DoctorLabel)
+                                .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(adminDoctorsRemovalBtn))
+                                .addComponent(jButton4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AdministrationPanelLayout.createSequentialGroup()
@@ -1065,9 +1074,7 @@ counter++;
                                     .addGroup(AdministrationPanelLayout.createSequentialGroup()
                                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(adminSecretaryAdditionBtn)
-                                            .addComponent(adminSecretaryRemovalBtn))
+                                        .addComponent(adminSecretaryRemovalBtn)
                                         .addGap(12, 12, 12)
                                         .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(adminNewNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1083,19 +1090,7 @@ counter++;
                                 .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel33)
                                     .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(83, 83, 83))
-                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
-                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameLabel3)
-                            .addComponent(usernameLabel3)
-                            .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
-                        .addComponent(adminDoctorRatingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(83, 83, 83))))
         );
         AdministrationPanelLayout.setVerticalGroup(
             AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1145,14 +1140,10 @@ counter++;
                         .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AdministrationPanelLayout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(adminDoctorsAddBtn)
-                                .addGap(18, 18, 18)
+                                .addGap(90, 90, 90)
                                 .addComponent(adminDoctorsRemovalBtn))
                             .addGroup(AdministrationPanelLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(adminSecretaryAdditionBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(84, 84, 84)
                                 .addComponent(adminSecretaryRemovalBtn)))))
                 .addGap(18, 18, 18)
                 .addComponent(adminDoctorRatingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1487,10 +1478,6 @@ counter++;
         logOffButtonOnClick();
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void adminSecretaryAdditionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminSecretaryAdditionBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adminSecretaryAdditionBtnActionPerformed
-
     private void terminationApprovalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminationApprovalButtonActionPerformed
         // TODO add your handling code here:
         terminateAccounts();
@@ -1512,6 +1499,7 @@ counter++;
 
     private void adminSecretaryRemovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminSecretaryRemovalBtnActionPerformed
         // TODO add your handling code here:
+        secretaryRemovalBtn();
     }//GEN-LAST:event_adminSecretaryRemovalBtnActionPerformed
 
     private void adminDoctorsRemovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminDoctorsRemovalBtnActionPerformed
@@ -1523,11 +1511,6 @@ counter++;
         // TODO add your handling code here:
         createAdmin();
     }//GEN-LAST:event_adminConfirmNewAdminActionPerformed
-
-    private void adminDoctorsAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminDoctorsAddBtnActionPerformed
-        // TODO add your handling code here:
-        addDoctor();
-    }//GEN-LAST:event_adminDoctorsAddBtnActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -1582,13 +1565,11 @@ counter++;
     private javax.swing.JButton adminConfirmNewAdmin;
     private javax.swing.JList<String> adminDoctorList;
     private javax.swing.JLabel adminDoctorRatingLabel;
-    private javax.swing.JButton adminDoctorsAddBtn;
     private javax.swing.JButton adminDoctorsRemovalBtn;
     private javax.swing.JLabel adminFeedbackLabel;
     private javax.swing.JTextField adminNameBox;
     private javax.swing.JTextField adminNewNameText;
     private javax.swing.JTextField adminNewPasswordText;
-    private javax.swing.JButton adminSecretaryAdditionBtn;
     private javax.swing.JList<String> adminSecretaryList;
     private javax.swing.JButton adminSecretaryRemovalBtn;
     private javax.swing.JTextField adminUserNameBox;
