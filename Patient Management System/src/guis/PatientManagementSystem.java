@@ -19,11 +19,13 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     List<DoctorClass> doctors = new ArrayList<DoctorClass>();
     List<AdminClass> admins = new ArrayList<AdminClass>();
     List<SecretaryClass> secretarys = new ArrayList<SecretaryClass>();
+    List<MedicineClass> stock = new ArrayList<MedicineClass>();
     DefaultListModel model = new DefaultListModel();
     DefaultListModel ratingList = new DefaultListModel();
     DefaultListModel terminationListModel = new DefaultListModel();
     DefaultListModel adminDoctorListModel = new DefaultListModel();
     DefaultListModel adminSecretaryListModel = new DefaultListModel();
+    DefaultListModel secretaryPatientListModel = new DefaultListModel();
 PatientClass newPatient;
  DoctorClass doctor;
  AdminClass admin;
@@ -41,6 +43,7 @@ PatientClass newPatient;
         terminationsList.setModel(terminationListModel);
         adminDoctorList.setModel(adminDoctorListModel);
         adminSecretaryList.setModel(adminSecretaryListModel);
+        SecretaryPatientList.setModel(secretaryPatientListModel);
 logOffButtonOnClick();
 
 
@@ -53,6 +56,16 @@ logOffButtonOnClick();
         doctors.add(new DoctorClass("D3", "ironprice" ,"Theon Greyjoy", 1, "*Patient Feedback* A little rough, missed my diagnosis three times."));
         admins.add(new AdminClass("A1", "king", "Arys Oakheart"));
         secretarys.add(new SecretaryClass("S1", "needle", "Arya Stark"));
+        stock.add(new MedicineClass("Paracetemol" ,"2 tablets twice a day", 5));
+        stock.add(new MedicineClass("Ibruprofen" ,"2 tablets twice a day", 5));
+        stock.add(new MedicineClass("Xanax" ," 0.25mg three times a day", 5));
+         stock.add(new MedicineClass("Norco" ,"325mg once a day", 5));
+          stock.add(new MedicineClass("Metformin" ,"24mg twice a day", 5));
+           stock.add(new MedicineClass("Lisinopril" ,"24mg twice a day", 5));
+            stock.add(new MedicineClass("Co-codamol" ,"1-2 tablets a day ", 5));
+             stock.add(new MedicineClass("Adderall" ,"30mg twice a day", 5));
+              stock.add(new MedicineClass("Ambien" ,"6.25mg once before bed", 5));
+               stock.add(new MedicineClass("Naproxen" ,"500mg Extended release once a day", 5));
     }
     
     /**
@@ -134,6 +147,11 @@ prescriptionText.setText(patients.get(i).getMedicines());
              secretaryNameBox.setText(nameText.getText());
                              mainPanel.addTab("Secretary", SecretaryPanel);
                              mainPanel.remove(LoginPanel);}}
+                  for (int i = 0; i < patients.size(); i++) {
+                      if (!secretaryPatientListModel.contains(patients.get(i).getName())){
+                 secretaryPatientListModel.addElement(patients.get(i).getName());}
+                         
+             }
              break;
              
          case "Administrator":
@@ -164,7 +182,7 @@ prescriptionText.setText(patients.get(i).getMedicines());
      }}    
      
      catch(Exception e){
-             feedbackLabel.setText("An error has occured: Make sure you have selected everything., otherwise contact an administrator.");
+             feedbackLabel.setText("An error has occured: Make sure you have selected everything, otherwise contact an administrator.");
              }
      
      
@@ -378,6 +396,21 @@ counter++;
            }
        
    }
+   
+   public void confirmApps(){
+       
+   }
+   public void removePatient(){
+       if (SecretaryPatientList.getSelectedValue() != null){
+           for (int i = 0; i < patients.size(); i++) {
+               if (patients.get(i).getName() == SecretaryPatientList.getSelectedValue()){
+                   secretaryPatientListModel.removeElement((SecretaryPatientList.getSelectedValue()));
+                   patients.remove(i);
+               }
+           }
+       
+       }
+   }
     /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -455,12 +488,13 @@ counter++;
         jScrollPane9 = new javax.swing.JScrollPane();
         terminationsList = new javax.swing.JList<>();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        appointmentRequestList = new javax.swing.JList<>();
         jLabel34 = new javax.swing.JLabel();
-        jScrollPane16 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        SecretaryPatientList = new javax.swing.JList<>();
         PatientPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -903,18 +937,29 @@ counter++;
         terminationsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane9.setViewportView(terminationsList);
 
-        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane11.setViewportView(jList3);
+        appointmentRequestList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane11.setViewportView(appointmentRequestList);
 
         jLabel34.setText("Patients");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane16.setViewportView(jTextArea3);
-
         jButton7.setText("Confirm");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Give Prescription");
+
+        jButton4.setText("Remove");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        SecretaryPatientList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane18.setViewportView(SecretaryPatientList);
 
         javax.swing.GroupLayout SecretaryPanelLayout = new javax.swing.GroupLayout(SecretaryPanel);
         SecretaryPanel.setLayout(SecretaryPanelLayout);
@@ -930,37 +975,37 @@ counter++;
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel34)
-                        .addGap(345, 345, 345))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7))
+                        .addGap(76, 76, 76)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(approvalButton))
+                        .addGap(37, 37, 37))
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jButton4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addComponent(terminationApprovalButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton7))
-                                .addGap(76, 76, 76)
-                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(approvalButton))
-                                .addGap(37, 37, 37))
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addComponent(terminationApprovalButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 6, Short.MAX_VALUE)))))
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -980,11 +1025,13 @@ counter++;
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SecretaryPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel34)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton4)
+                                    .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1398,8 +1445,8 @@ counter++;
                                 .addGap(18, 18, 18)
                                 .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(adminSaveFeedback)
-                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 365, Short.MAX_VALUE))
+                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 267, Short.MAX_VALUE))
                     .addGroup(AdministrationPanelLayout.createSequentialGroup()
                         .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1612,6 +1659,17 @@ counter++;
         saveDoctorFeedback();
     }//GEN-LAST:event_adminSaveFeedbackActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        confirmApps();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+        removePatient();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1656,6 +1714,7 @@ counter++;
     private javax.swing.JPanel RegisterPanel;
     private javax.swing.JLabel SecretaryLabel;
     private javax.swing.JPanel SecretaryPanel;
+    private javax.swing.JList<String> SecretaryPatientList;
     private javax.swing.JList<String> adminAccountLister;
     private javax.swing.JButton adminConfirmNewAdmin;
     private javax.swing.JTextArea adminDoctorFeedbackBox;
@@ -1672,6 +1731,7 @@ counter++;
     private javax.swing.JButton adminSecretaryRemovalBtn;
     private javax.swing.JTextField adminUserNameBox;
     private javax.swing.JButton appointmentRequestButton;
+    private javax.swing.JList<String> appointmentRequestList;
     private javax.swing.JTextField appointmentText;
     private javax.swing.JButton approvalButton;
     private javax.swing.JSpinner daySpinner;
@@ -1685,6 +1745,7 @@ counter++;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -1726,7 +1787,6 @@ counter++;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1734,8 +1794,8 @@ counter++;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
-    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1746,7 +1806,6 @@ counter++;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton loginButton;
