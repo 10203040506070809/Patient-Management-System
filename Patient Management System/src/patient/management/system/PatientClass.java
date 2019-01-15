@@ -16,8 +16,8 @@ public class PatientClass extends PersonClass {
     protected String notes;
     protected String history;
     protected String medicines;
-    
-public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines)
+    protected String appointment;
+public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines, String appointment)
 {
     //calls super class 
   
@@ -28,6 +28,7 @@ this.gender = gender;
 this.notes = notes;
 this.history = history;
 this.medicines = medicines;
+this.appointment = appointment;
 }
 
     public int getAge() {
@@ -68,6 +69,14 @@ this.medicines = medicines;
 
     public void setMedicines(String medicines) {
         this.medicines = medicines;
+    }
+
+    public String getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(String appointment) {
+        this.appointment = appointment;
     }
 
 
