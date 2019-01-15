@@ -10,6 +10,13 @@ package patient.management.system;
  * @author jflet
  */
 public class AdminClass extends PersonClass{
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @param name
+     */
     public AdminClass(String username, String password, String name)
 {
     //calls super class 

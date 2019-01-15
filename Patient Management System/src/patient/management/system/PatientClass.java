@@ -11,13 +11,49 @@ package patient.management.system;
  */    
 public class PatientClass extends PersonClass {
     
+    /**
+     *
+     */
     protected int age;
+
+    /**
+     *
+     */
     protected String gender;
+
+    /**
+     *
+     */
     protected String notes;
+
+    /**
+     *
+     */
     protected String history;
+
+    /**
+     *
+     */
     protected String medicines;
+
+    /**
+     *
+     */
     protected String appointment;
-public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines, String appointment)
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @param name
+     * @param age
+     * @param gender
+     * @param notes
+     * @param history
+     * @param medicines
+     * @param appointment
+     */
+    public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines, String appointment)
 {
     //calls super class 
   
@@ -31,50 +67,98 @@ this.medicines = medicines;
 this.appointment = appointment;
 }
 
+    /**
+     *
+     * @return
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     *
+     * @param age
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     *
+     * @param gender
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNotes() {
         return notes;
     }
 
+    /**
+     *
+     * @param notes
+     */
     public void setNotes(String notes) {
         this.notes = notes;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHistory() {
         return history;
     }
 
+    /**
+     *
+     * @param history
+     */
     public void setHistory(String history) {
         this.history = history;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMedicines() {
         return medicines;
     }
 
+    /**
+     *
+     * @param medicines
+     */
     public void setMedicines(String medicines) {
         this.medicines = medicines;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAppointment() {
         return appointment;
     }
 
+    /**
+     *
+     * @param appointment
+     */
     public void setAppointment(String appointment) {
         this.appointment = appointment;
     }

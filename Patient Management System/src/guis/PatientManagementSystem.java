@@ -51,6 +51,9 @@ logOffButtonOnClick();
         secretarys.add(new SecretaryClass("S1", "needle", "Arya Stark"));
     }
     
+    /**
+     *
+     */
     public void loginButtonOnClick(){
        
        String userEntry = usernameText.getText(); 
@@ -158,6 +161,10 @@ prescriptionText.setText(patients.get(i).getMedicines());
              
 
     }
+
+    /**
+     *
+     */
     public void registerOnClick(){
 if (registerName.getText() != null && registerGenderList.getSelectedValue() != null && registerDobText.getText() != null){
     //make sure no premade patients have the same ID
@@ -179,9 +186,9 @@ if (registerName.getText() != null && registerGenderList.getSelectedValue() != n
     
 }
      
-    
-        
-    
+    /**
+     *
+     */
     public void logOffButtonOnClick(){
                 mainPanel.remove(DoctorPanel);
         mainPanel.remove(PatientPanel);
@@ -189,7 +196,11 @@ if (registerName.getText() != null && registerGenderList.getSelectedValue() != n
         mainPanel.remove(AdministrationPanel);
         mainPanel.add("Login", LoginPanel);
     }
-public void approvePatient(){
+
+    /**
+     *
+     */
+    public void approvePatient(){
     //approve all patients currently waiting
     for (int i = 0; i < newPatients.size(); i++) {
         patients.add(newPatients.get(i));
@@ -198,7 +209,11 @@ public void approvePatient(){
     newPatients.clear();
     model.clear();
 }
-public void doctorFeedbackSelect(){
+
+    /**
+     *
+     */
+    public void doctorFeedbackSelect(){
    String drName = patientDoctorRatingList.getSelectedValue();
    System.out.println(drName);
     for (int i = 0; i < doctors.size(); i++) {
@@ -209,7 +224,11 @@ public void doctorFeedbackSelect(){
         }
     }
 }
-public void confirmFeedback(){
+
+    /**
+     *
+     */
+    public void confirmFeedback(){
     String drName = patientDoctorRatingList.getSelectedValue();
     if (patientFeedback.getText() != null && patientDoctorRatingSpinner.getValue() != null)
     for (int i = 0; i < doctors.size(); i++) {
@@ -221,7 +240,11 @@ public void confirmFeedback(){
     }
     }
 }
-public void requestAppointmentBtn(){
+
+    /**
+     *
+     */
+    public void requestAppointmentBtn(){
     String chosenDoctor;
     if (daySpinner.getValue() != null && monthSpinner.getValue() != null && yearSpinner.getValue() != null){
         if (patientDoctorRatingList.getSelectedValue() != null){
@@ -243,12 +266,20 @@ public void requestAppointmentBtn(){
     }
 }
 }
-public void requestAccountTermination(){
+
+    /**
+     *
+     */
+    public void requestAccountTermination(){
 terminationListModel.addElement(currentUserName);
 
     
 }
-public void terminateAccounts(){
+
+    /**
+     *
+     */
+    public void terminateAccounts(){
     for (int i = 0; i < patients.size(); i++) {
         if(terminationListModel.contains(patients.get(i).getUsername())){
                         System.out.println("Account" + patients.get(i).getUsername() +  "removed.");
@@ -260,6 +291,21 @@ public void terminateAccounts(){
         
     
 }
+
+    /**
+     *
+     */
+    public void removeDoctor(){
+    
+}
+   public void createAdmin(){
+       if (adminNewNameText.getText() != null && adminNewPasswordText.getText() != null){
+               admins.add(new AdminClass("A" + counter, adminNewPasswordText.getText(), adminNewNameText.getText()));
+
+adminFeedbackLabel.setText("The new admin account's username is A" + counter);
+counter++;
+       }
+   }
     /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -316,23 +362,35 @@ public void terminateAccounts(){
         jScrollPane6 = new javax.swing.JScrollPane();
         patientApprovalList = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         terminationApprovalButton = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         terminationsList = new javax.swing.JList<>();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
         AdministrationPanel = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
-        DoctorText = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        DoctorText1 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
         SecretaryLabel = new javax.swing.JLabel();
         DoctorLabel = new javax.swing.JLabel();
         adminUserNameBox = new javax.swing.JTextField();
         usernameLabel3 = new javax.swing.JLabel();
         nameLabel3 = new javax.swing.JLabel();
         adminNameBox = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        adminSecretaryList = new javax.swing.JList<>();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        adminDoctorList = new javax.swing.JList<>();
+        adminDoctorsAddBtn = new javax.swing.JButton();
+        adminDoctorsRemovalBtn = new javax.swing.JButton();
+        adminSecretaryAdditionBtn = new javax.swing.JButton();
+        adminSecretaryRemovalBtn = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        adminFeedbackLabel = new javax.swing.JLabel();
+        adminNewNameText = new javax.swing.JTextField();
+        adminNewPasswordText = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        adminConfirmNewAdmin = new javax.swing.JButton();
         PatientPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -634,6 +692,7 @@ public void terminateAccounts(){
             }
         });
 
+        scriptList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(scriptList);
 
         patientApprovalList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -653,12 +712,11 @@ public void terminateAccounts(){
             }
         });
 
-        terminationsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        terminationsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane9.setViewportView(terminationsList);
+
+        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane11.setViewportView(jList3);
 
         javax.swing.GroupLayout SecretaryPanelLayout = new javax.swing.GroupLayout(SecretaryPanel);
         SecretaryPanel.setLayout(SecretaryPanelLayout);
@@ -682,9 +740,11 @@ public void terminateAccounts(){
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel5)
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(76, 76, 76)
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -695,9 +755,9 @@ public void terminateAccounts(){
                                 .addComponent(terminationApprovalButton)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane9))
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))))
         );
         SecretaryPanelLayout.setVerticalGroup(
@@ -719,20 +779,20 @@ public void terminateAccounts(){
                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                            .addGap(67, 67, 67)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-                        .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                            .addGap(68, 68, 68)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel22))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SecretaryPanelLayout.createSequentialGroup()
+                            .addGap(67, 67, 67)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5))))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -750,14 +810,6 @@ public void terminateAccounts(){
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        DoctorText.setViewportView(jTextArea2);
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        DoctorText1.setViewportView(jTextArea3);
-
         SecretaryLabel.setText("Secretarys");
 
         DoctorLabel.setText("Doctors");
@@ -770,6 +822,48 @@ public void terminateAccounts(){
 
         adminNameBox.setEditable(false);
 
+        adminSecretaryList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane8.setViewportView(adminSecretaryList);
+
+        adminDoctorList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane10.setViewportView(adminDoctorList);
+
+        adminDoctorsAddBtn.setText("Add");
+
+        adminDoctorsRemovalBtn.setText("Remove");
+        adminDoctorsRemovalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminDoctorsRemovalBtnActionPerformed(evt);
+            }
+        });
+
+        adminSecretaryAdditionBtn.setText("Add");
+        adminSecretaryAdditionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminSecretaryAdditionBtnActionPerformed(evt);
+            }
+        });
+
+        adminSecretaryRemovalBtn.setText("Remove");
+        adminSecretaryRemovalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminSecretaryRemovalBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setText("Create a new admin account:");
+
+        jLabel24.setText("Name");
+
+        jLabel25.setText("Password");
+
+        adminConfirmNewAdmin.setText("Confirm");
+        adminConfirmNewAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminConfirmNewAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AdministrationPanelLayout = new javax.swing.GroupLayout(AdministrationPanel);
         AdministrationPanel.setLayout(AdministrationPanelLayout);
         AdministrationPanelLayout.setHorizontalGroup(
@@ -779,46 +873,92 @@ public void terminateAccounts(){
                 .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdministrationPanelLayout.createSequentialGroup()
                         .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DoctorText, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DoctorLabel))
-                        .addGap(172, 172, 172)
-                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SecretaryLabel)
-                            .addComponent(DoctorText1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(295, Short.MAX_VALUE))
-                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
-                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameLabel3)
-                            .addComponent(usernameLabel3))
+                            .addComponent(usernameLabel3)
+                            .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DoctorLabel)
+                            .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                .addComponent(adminDoctorsAddBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(adminDoctorsRemovalBtn)))
+                        .addGap(77, 77, 77)
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                .addComponent(SecretaryLabel)
+                                .addGap(193, 193, 193)
+                                .addComponent(jLabel23))
+                            .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89)
+                                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(adminNewNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel24))
+                                .addGap(27, 27, 27)
+                                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25)
+                                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                        .addComponent(adminNewPasswordText, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(adminConfirmNewAdmin))))
+                            .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                .addComponent(adminSecretaryAdditionBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(adminSecretaryRemovalBtn)
+                                .addGap(108, 108, 108)
+                                .addComponent(adminFeedbackLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 173, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         AdministrationPanelLayout.setVerticalGroup(
             AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdministrationPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdministrationPanelLayout.createSequentialGroup()
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(DoctorLabel)
+                                    .addComponent(SecretaryLabel)
+                                    .addComponent(jLabel23))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(AdministrationPanelLayout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel24)
+                                        .addComponent(jLabel25))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(adminNewNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(adminNewPasswordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(adminConfirmNewAdmin)))
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(adminDoctorsAddBtn)
+                            .addComponent(adminDoctorsRemovalBtn)
+                            .addComponent(adminSecretaryAdditionBtn)
+                            .addComponent(adminSecretaryRemovalBtn)
+                            .addComponent(adminFeedbackLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdministrationPanelLayout.createSequentialGroup()
                         .addComponent(usernameLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(adminUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
                         .addComponent(nameLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DoctorLabel)
-                    .addComponent(SecretaryLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(AdministrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DoctorText, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DoctorText1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1037, 1037, 1037))
+                        .addComponent(adminNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(115, 115, 115))
         );
 
         mainPanel.addTab("Administration", AdministrationPanel);
@@ -1106,32 +1246,11 @@ public void terminateAccounts(){
         logOffButtonOnClick();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-                logOffButtonOnClick();
-
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-                logOffButtonOnClick();
-
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
                 logOffButtonOnClick();
 
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void approvalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvalButtonActionPerformed
-        // TODO add your handling code here:
-        approvePatient();
-    }//GEN-LAST:event_approvalButtonActionPerformed
-
-    private void secretaryUserNameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secretaryUserNameBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_secretaryUserNameBoxActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
@@ -1167,10 +1286,47 @@ public void terminateAccounts(){
         requestAccountTermination();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        logOffButtonOnClick();
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void adminSecretaryAdditionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminSecretaryAdditionBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminSecretaryAdditionBtnActionPerformed
+
     private void terminationApprovalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminationApprovalButtonActionPerformed
         // TODO add your handling code here:
         terminateAccounts();
     }//GEN-LAST:event_terminationApprovalButtonActionPerformed
+
+    private void approvalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvalButtonActionPerformed
+        // TODO add your handling code here:
+        approvePatient();
+    }//GEN-LAST:event_approvalButtonActionPerformed
+
+    private void secretaryUserNameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secretaryUserNameBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_secretaryUserNameBoxActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        logOffButtonOnClick();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void adminSecretaryRemovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminSecretaryRemovalBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminSecretaryRemovalBtnActionPerformed
+
+    private void adminDoctorsRemovalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminDoctorsRemovalBtnActionPerformed
+        // TODO add your handling code here:
+        removeDoctor();
+    }//GEN-LAST:event_adminDoctorsRemovalBtnActionPerformed
+
+    private void adminConfirmNewAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminConfirmNewAdminActionPerformed
+        // TODO add your handling code here:
+        createAdmin();
+    }//GEN-LAST:event_adminConfirmNewAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1211,14 +1367,22 @@ public void terminateAccounts(){
     private javax.swing.JPanel AdministrationPanel;
     private javax.swing.JLabel DoctorLabel;
     private javax.swing.JPanel DoctorPanel;
-    private javax.swing.JScrollPane DoctorText;
-    private javax.swing.JScrollPane DoctorText1;
     private javax.swing.JPanel LoginPanel;
     private javax.swing.JPanel PatientPanel;
     private javax.swing.JPanel RegisterPanel;
     private javax.swing.JLabel SecretaryLabel;
     private javax.swing.JPanel SecretaryPanel;
+    private javax.swing.JButton adminConfirmNewAdmin;
+    private javax.swing.JList<String> adminDoctorList;
+    private javax.swing.JButton adminDoctorsAddBtn;
+    private javax.swing.JButton adminDoctorsRemovalBtn;
+    private javax.swing.JLabel adminFeedbackLabel;
     private javax.swing.JTextField adminNameBox;
+    private javax.swing.JTextField adminNewNameText;
+    private javax.swing.JTextField adminNewPasswordText;
+    private javax.swing.JButton adminSecretaryAdditionBtn;
+    private javax.swing.JList<String> adminSecretaryList;
+    private javax.swing.JButton adminSecretaryRemovalBtn;
     private javax.swing.JTextField adminUserNameBox;
     private javax.swing.JButton appointmentRequestButton;
     private javax.swing.JTextField appointmentText;
@@ -1251,6 +1415,9 @@ public void terminateAccounts(){
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1258,17 +1425,18 @@ public void terminateAccounts(){
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel loginPassLabel;
     private javax.swing.JLabel loginUserLabel;
