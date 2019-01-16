@@ -56,9 +56,9 @@ logOffButtonOnClick();
 
 
 
-         patients.add(new PatientClass("P1", "the north", "Jon Snow", 18, "Male", "Suffers with Belly ache", "Belly ache", "Paracetemol, 24mg 2x a day", "", ""));
-         patients.add(new PatientClass("P2", "betrayal", "Robb Stark", 23, "Male", "Suffers with migraines", "Migraines", "Ibruprofen, 24mg 2x a day", "", ""));
-         patients.add(new PatientClass("P3", "joffrey", "Sansa Stark", 15, "Female", "Suffers with Bipolar Disorder", "Bipolar", "Xanax, 24mg 1x a day","", ""));
+         patients.add(new PatientClass("P1", "the north", "Jon Snow", 18, "Male", "Suffers with Belly ache", "Belly ache", "", "", "Paracetemol, 24mg 2x a day"));
+         patients.add(new PatientClass("P2", "betrayal", "Robb Stark", 23, "Male", "Suffers with migraines", "Migraines", "", "", "Ibruprofen, 24mg 2x a day"));
+         patients.add(new PatientClass("P3", "joffrey", "Sansa Stark", 15, "Female", "Suffers with Bipolar Disorder", "Bipolar", "","", "Xanax, 24mg 1x a day"));
         doctors.add(new DoctorClass("D1", "the watch" ,"Aemon Targaryen", 5, "*Patient Feedback* Caring and thorough."));
         doctors.add(new DoctorClass("D2", "boar" ,"Robert Baratheon", 2, "*Patient Feedback* Callous."));
         doctors.add(new DoctorClass("D3", "ironprice" ,"Theon Greyjoy", 1, "*Patient Feedback* A little rough, missed my diagnosis three times."));
@@ -96,6 +96,8 @@ logOffButtonOnClick();
             //check if patient exists, then check for password
             //password stored in plaintext, HASH PLS
             if (patients.get(i).getUsername().equals(userEntry) && patients.get(i).getPassword().equals(passEntry)){
+                patientUserNameBox.setText(patients.get(i).getUsername());
+                patientNameBox.setText(patients.get(i).getName());
                   System.out.println((patients.get(i).getName()));
                                currentUserName = userEntry;
 appointmentText.setText(patients.get(i).getAppointment());
@@ -177,7 +179,7 @@ prescriptionText.setText(patients.get(i).getMedicines());
                       if (!secretaryPatientListModel.contains(patients.get(i).getName())){
                  secretaryPatientListModel.addElement(patients.get(i).getName());}}
                       for (int j = 0; j <stock.size(); j++) {
-                          scriptListModel.addElement(stock.get(j).getName() + " " + stock.get(j).getDosage() + " Stock: " + stock.get(j).getStockLevel());
+                          scriptListModel.addElement(stock.get(j).getName());
                       }
            
              
@@ -296,6 +298,7 @@ if (registerName.getText() != null && registerGenderList.getSelectedValue() != n
     if (doctors.get(i).getName().equals(drName)){
     doctors.get(i).setFeedback(doctors.get(i).getFeedback() + "\n" + "*Patient Feedback:* " + patientFeedback.getText());
     doctors.get(i).setRating((int) patientDoctorRatingSpinner.getValue());
+    doctorFeedbackSelect();
     }
     }
 }
@@ -454,13 +457,19 @@ counter++;
    }
    
    public void givePrescription(){
+      String dosage = null;
        if (SecretaryPatientList.getSelectedValue() != null && scriptList.getSelectedValue() != null ){
            for (int i = 0; i < patients.size(); i++) {
                if (patients.get(i).getName().equals(SecretaryPatientList.getSelectedValue()))
                {
                  if(patients.get(i).getPrescription().contains(scriptList.getSelectedValue())){
-                   patients.get(i).setMedicines(patients.get(i).getMedicines() + " " + scriptList.getSelectedValue());
-               System.out.println("Added medicine to patient");
+                     for (int j = 0; j < stock.size(); j++) {
+                         if (stock.get(j).getName().equals(scriptList.getSelectedValue())){
+                             dosage = stock.get(j).getDosage();
+                         }
+                     }
+                   patients.get(i).setMedicines(patients.get(i).getMedicines() + scriptList.getSelectedValue() + " " + dosage);
+               System.out.println("Added medicine to patient: " + patients.get(i).getMedicines());
            }}
            }
        }
