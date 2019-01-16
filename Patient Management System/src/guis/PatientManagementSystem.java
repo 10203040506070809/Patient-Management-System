@@ -81,12 +81,13 @@ logOffButtonOnClick();
                stock.add(new MedicineClass("Naproxen" ,"500mg Extended release once a day", 5));
     }
     
-    /**
+    /*
      * Logging in method
      * checks if all input values are filled
      * checks if the users input matches something in the relevant roles list and if it does, logs in as that user. 
      * Sets lists and text boxes that need to be iterated through
      * Gives an error if the username or password does not match
+     *@param userEntry
      */
     private void loginButtonOnClick(){
        
@@ -321,7 +322,7 @@ adminSecretaryListModel.clear();
         }
 
     /**
-     * onclick checks if the date spinners are nuled, if not then it checks for a selected doctor. If not, any doctor is selected and requests an appointment with any doctor, otherwise that specific doctor is chosen.
+     * onclick checks if the date spinners are nulled, if not then it checks for a selected doctor. If not, any doctor is selected and requests an appointment with any doctor, otherwise that specific doctor is chosen.
      * adds to the patient history that they requested an appointment
      */
     public void requestAppointmentBtn(){
