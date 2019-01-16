@@ -30,11 +30,13 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     DefaultListModel doctorPatientListModel = new DefaultListModel();
     DefaultListModel doctorAppointmentsBoxModel = new DefaultListModel();
     DefaultListModel toPrescribeListModel = new DefaultListModel();
+    DefaultListModel appointmentRequestListModel = new DefaultListModel();
 PatientClass newPatient;
  DoctorClass doctor;
  AdminClass admin;
  SecretaryClass secretary;
  int counter = 100;
+ String patientUserName;
  
     /**
      * Creates new form PatientManagementSystem
@@ -52,6 +54,7 @@ PatientClass newPatient;
         doctorPatientSelectBox.setModel(doctorPatientListModel);
         doctorAppointmentsBox.setModel(doctorAppointmentsBoxModel);
         toPrescribeList.setModel(toPrescribeListModel);
+        appointmentRequestList.setModel(appointmentRequestListModel);
 logOffButtonOnClick();
 
 
@@ -175,12 +178,7 @@ prescriptionText.setText(patients.get(i).getMedicines());
              secretaryNameBox.setText(secretarys.get(i).getName());
                              mainPanel.addTab("Secretary", SecretaryPanel);
                              mainPanel.remove(LoginPanel);}}
-                  for (int i = 0; i < patients.size(); i++) {
-                      if (!secretaryPatientListModel.contains(patients.get(i).getName())){
-                 secretaryPatientListModel.addElement(patients.get(i).getName());}}
-                      for (int j = 0; j <stock.size(); j++) {
-                          scriptListModel.addElement(stock.get(j).getName());
-                      }
+SecaddElementsToLists();
            
              
              break;
@@ -324,15 +322,12 @@ if (registerName.getText() != null && registerGenderList.getSelectedValue() != n
     String appointmentConcatenated ="\n" + " Requested an appointment for: " + appointment; 
     patientHistoryText.setText(patientHistoryText.getText() + "\n" + appointmentConcatenated);
     System.out.println(currentUserName);
-    for (int i = 0; i < patients.size(); i++) {
-        if (patients.get(i).getUsername().equals(currentUserName)){
-            patients.get(i).setAppointment(appointment);
-            patients.get(i).setHistory(patients.get(i).getHistory() + appointmentConcatenated);
-            System.out.println(patients.get(i).getHistory());
-            appointmentText.setText(patients.get(i).getAppointment());
+    appointmentRequestListModel.addElement(appointment);
+    patientUserName = currentUserName;
 
-        }
-    }
+
+        
+    
 }
 }
 
@@ -431,7 +426,15 @@ counter++;
    }
    
    public void confirmApps(){
-       
+           for (int i = 0; i < patients.size(); i++) {
+        if (patients.get(i).getUsername().equals(patientUserName)){
+            patients.get(i).setAppointment(appointmentRequestList.getSelectedValue());
+            patients.get(i).setHistory(patients.get(i).getHistory() + "\n" + " Requested an appointment for: " + appointmentRequestList.getSelectedValue()); 
+            System.out.println(patients.get(i).getHistory());
+            appointmentText.setText(patients.get(i).getAppointment());
+            appointmentRequestListModel.removeElement(appointmentRequestList.getSelectedValue());
+   }
+           }
    }
    public void removePatient(){
        if (SecretaryPatientList.getSelectedValue() != null){
@@ -548,6 +551,16 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
          }
      }
  }         
+ private void SecaddElementsToLists(){
+        secretaryPatientListModel.clear();
+                               scriptListModel.clear();
+                           for (int i = 0; i < patients.size(); i++) {
+                            
+                      if (!secretaryPatientListModel.contains(patients.get(i).getName())){
+                 secretaryPatientListModel.addElement(patients.get(i).getName());}}
+                      for (int j = 0; j <stock.size(); j++) {
+                          scriptListModel.addElement(stock.get(j).getName());
+                      }}
 /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1336,62 +1349,65 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
         SecretaryPanel.setLayout(SecretaryPanelLayout);
         SecretaryPanelLayout.setHorizontalGroup(
             SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
+            .addGroup(SecretaryPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel34)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameLabel2)
-                                    .addComponent(nameLabel2))
-                                .addGap(64, 64, 64))
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel34)
+                                            .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(usernameLabel2))
+                                        .addGap(114, 114, 114))
+                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(givePrescription)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(orderScripts))
+                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jLabel3))))
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(givePrescription)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(orderScripts))
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel3))))
-                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7)
-                        .addGap(135, 135, 135)))
-                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(terminationApprovalButton))
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(approvalButton))
-                            .addComponent(jLabel4))
-                        .addGap(0, 56, Short.MAX_VALUE))
-                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                                .addGap(50, 50, 50))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton7)
+                                .addGap(135, 135, 135)))
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(terminationApprovalButton))
+                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(approvalButton))
+                                    .addComponent(jLabel4))
+                                .addGap(0, 56, Short.MAX_VALUE))
+                            .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameLabel2)
+                            .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         SecretaryPanelLayout.setVerticalGroup(
@@ -1405,12 +1421,12 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                                 .addComponent(usernameLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
+                                .addGap(23, 23, 23)
                                 .addComponent(nameLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel34)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(secretaryNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel34))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SecretaryPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
