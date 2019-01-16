@@ -254,6 +254,12 @@ if (registerName.getText() != null && registerGenderList.getSelectedValue() != n
         mainPanel.remove(SecretaryPanel);
         mainPanel.remove(AdministrationPanel);
         mainPanel.add("Login", LoginPanel);
+        doctorPatientListModel.clear();
+scriptListModel.clear();
+doctorAppointmentsBoxModel.clear();
+toPrescribeListModel.clear();
+adminDoctorListModel.clear();
+adminSecretaryListModel.clear();
     }
 
     /**
@@ -377,16 +383,19 @@ terminationListModel.addElement(currentUserName);
                case "Admin":
                admins.add(new AdminClass("A" + counter, adminNewPasswordText.getText(), adminNewNameText.getText()));
                adminFeedbackLabel.setText("The new admin account's username is A" + counter);
+               
                break;
                
                case "Secretary":
                    secretarys.add(new SecretaryClass("S" + counter, adminNewPasswordText.getText(), adminNewNameText.getText()));
                    adminFeedbackLabel.setText("The new secretary account's username is S" + counter);
+                   adminSecretaryListModel.addElement(secretarys.get(secretarys.size() - 1).getName());
                    break;
                    
                case "Doctor":
                    doctors.add(new DoctorClass("D" + counter, adminNewPasswordText.getText(), adminNewNameText.getText(), 0, ""));
                    adminFeedbackLabel.setText("The new doctor account's username is D" + counter);
+                   adminDoctorListModel.addElement(doctors.get(doctors.size() - 1).getName());
                    break;
            }
 
