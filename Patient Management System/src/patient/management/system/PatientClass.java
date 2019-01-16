@@ -41,7 +41,9 @@ public class PatientClass extends PersonClass {
      */
     protected String appointment;
 
-    /**
+    protected String prescription;
+     /* 
+   
      *
      * @param username
      * @param password
@@ -53,7 +55,7 @@ public class PatientClass extends PersonClass {
      * @param medicines
      * @param appointment
      */
-    public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines, String appointment)
+    public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines, String appointment , String prescription)
 {
     //calls super class 
   
@@ -65,6 +67,7 @@ this.notes = notes;
 this.history = history;
 this.medicines = medicines;
 this.appointment = appointment;
+this.prescription = prescription;
 }
 
     /**
@@ -161,6 +164,14 @@ this.appointment = appointment;
      */
     public void setAppointment(String appointment) {
         this.appointment = appointment;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
     }
 
 
