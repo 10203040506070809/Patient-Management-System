@@ -82,7 +82,11 @@ logOffButtonOnClick();
     }
     
     /**
-     *
+     * Logging in method
+     * checks if all input values are filled
+     * checks if the users input matches something in the relevant roles list and if it does, logs in as that user. 
+     * Sets lists and text boxes that need to be iterated through
+     * Gives an error if the username or password does not match
      */
     private void loginButtonOnClick(){
        
@@ -223,7 +227,10 @@ SecaddElementsToLists();
     }
 
     /**
-     *
+     * registers a new patient
+     * checks if all values are filled
+     * if they are, creates a new patient and adds it to a new patient list
+     * tells the user what their username will be
      */
     private void registerOnClick(){
 if (registerName.getText() != null && registerGenderList.getSelectedValue() != null && registerDobText.getText() != null){
@@ -248,7 +255,7 @@ if (registerName.getText() != null && registerGenderList.getSelectedValue() != n
 }
      
     /**
-     *
+     * closes all panels except register and login panels, and clears lists
      */
     private void logOffButtonOnClick(){
                 mainPanel.remove(DoctorPanel);
@@ -265,7 +272,7 @@ adminSecretaryListModel.clear();
     }
 
     /**
-     *
+     * onclick a secretary can approve all patients in the new patients list
      */
     private void approvePatient(){
     //approve all patients currently waiting
@@ -278,7 +285,7 @@ adminSecretaryListModel.clear();
 }
 
     /**
-     *
+     * onclick a patient can get a doctors feedback and rating
      */
     private void doctorFeedbackSelect(){
    String drName = patientDoctorRatingList.getSelectedValue();
@@ -293,7 +300,7 @@ adminSecretaryListModel.clear();
 }
 
     /**
-     *
+     * onclick a patient can give feedback and a rating to a doctor based on previous treatment.
      */
     private void confirmFeedback(){
     String drName = patientDoctorRatingList.getSelectedValue();
@@ -309,15 +316,13 @@ adminSecretaryListModel.clear();
     }
 }
     
-    else
-    {
-    
-    }
+
         
         }
 
     /**
-     *
+     * onclick checks if the date spinners are nuled, if not then it checks for a selected doctor. If not, any doctor is selected and requests an appointment with any doctor, otherwise that specific doctor is chosen.
+     * adds to the patient history that they requested an appointment
      */
     public void requestAppointmentBtn(){
     String chosenDoctor;
@@ -340,7 +345,7 @@ adminSecretaryListModel.clear();
 }
 
     /**
-     *
+     * adds the current patients username to a jlist to be deleted by a secretary
      */
     public void requestAccountTermination(){
 terminationListModel.addElement(currentUserName);
@@ -349,7 +354,8 @@ terminationListModel.addElement(currentUserName);
 }
 
     /**
-     *
+     * checks the termination list for all the patients usernames, if it contains one it deletes the relevant patient. 
+     * afterwards, it clears the list.
      */
     public void terminateAccounts(){
     for (int i = 0; i < patients.size(); i++) {
@@ -365,10 +371,10 @@ terminationListModel.addElement(currentUserName);
 }
 
     /**
-     *
+     * iterates through the doctors list and checks if the selected value is equal to the doctor in the list. If so, removes that doctor.
      */
     public void removeDoctor(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < doctors.size(); i++) {
             if (adminDoctorList.getSelectedValue() != null){
             if(doctors.get(i).getName().equals(adminDoctorList.getSelectedValue())){
                 doctors.remove(i);
@@ -377,7 +383,10 @@ terminationListModel.addElement(currentUserName);
         }}
 }
 
-   public void createAdmin(){
+    /**
+     * If all relevant fields are not null, creates a new user using the parameters the user has input and the selected role. then adds this to a list on the same jpanel.
+     */
+    public void createAdmin(){
        if (adminNewNameText.getText() != null && adminNewPasswordText.getText() != null &&  adminAccountLister.getSelectedValue() != null){
           
            switch (adminAccountLister.getSelectedValue()){
@@ -404,7 +413,13 @@ terminationListModel.addElement(currentUserName);
 counter++;
        }
    }
-   public void checkDoctorRating(){
+
+    /**
+     *  onclick button that checks whether there is a selected value,
+     * if there is it iterates through a list and compares the name of each element to the selected value
+     * if it's the same, it outputs the rating of that doctor
+     */
+    public void checkDoctorRating(){
        if (adminDoctorList.getSelectedValue() != null){
            for (int i = 0; i < doctors.size(); i++) {
                if (doctors.get(i).getName().equals(adminDoctorList.getSelectedValue())){
@@ -415,19 +430,25 @@ counter++;
        }
    }
    
-
-   public void secretaryRemovalBtn(){
-               for (int i = 0; i < 10; i++) {
+    /**
+     * //iterates through the secretarys list and checks the name of each element against the selected value
+     * if its the same, removes the element of the list
+     */
+    public void secretaryRemovalBtn(){
+               for (int i = 0; i < secretarys.size(); i++) {
             if (adminSecretaryList.getSelectedValue() != null){
             if(secretarys.get(i).getName().equals(adminSecretaryList.getSelectedValue())){
                 secretarys.remove(i);
                 adminSecretaryListModel.removeElement(adminSecretaryList.getSelectedValue());
             }
         }}
-               checkDoctorRating();
+               
    }
    
-   public void saveDoctorFeedback(){
+    /**
+     * passes the text in the feedback box to the doctors feedback variable
+     */
+    public void saveDoctorFeedback(){
        for (int i = 0; i < doctors.size(); i++) {
            if(doctors.get(i).getName().equals(adminDoctorList.getSelectedValue())){
            doctors.get(i).setFeedback(adminDoctorFeedbackBox.getText());
@@ -436,18 +457,30 @@ counter++;
        
    }
    
-   public void confirmApps(){
+    /**
+     *  iterates through the patient list to check for a patient username
+     * if it finds it, confirms the appointment with the doctor
+     * removes element from list
+     */
+    public void confirmApps(){
            for (int i = 0; i < patients.size(); i++) {
         if (patients.get(i).getUsername().equals(patientUserName)){
             patients.get(i).setAppointment(appointmentRequestList.getSelectedValue());
-            patients.get(i).setHistory(patients.get(i).getHistory() + "\n" + " Requested an appointment for: " + appointmentRequestList.getSelectedValue()); 
+          //  patients.get(i).setHistory(patients.get(i).getHistory() + "\n" + " Requested an appointment for: " + appointmentRequestList.getSelectedValue()); 
             System.out.println(patients.get(i).getHistory());
-            appointmentText.setText(patients.get(i).getAppointment());
+            //appointmentText.setText(patients.get(i).getAppointment());
             appointmentRequestListModel.removeElement(appointmentRequestList.getSelectedValue());
    }
            }
    }
-   public void removePatient(){
+
+    /**
+     *checks if the selected value is null
+     * if not, iterates through a patient list for a value
+     * if it finds it, removes the patient at that element
+     * removes that value from the list
+     */
+    public void removePatient(){
        if (SecretaryPatientList.getSelectedValue() != null){
            for (int i = 0; i < patients.size(); i++) {
                if (patients.get(i).getName().equals(SecretaryPatientList.getSelectedValue())){
@@ -458,7 +491,14 @@ counter++;
        
        }
    }
-   public void orderScriptsBtn(){
+
+    /**
+     * checks if selected value is null
+     * if not, iterates through stock for the selected value
+     * sets that stock level to 1 higher
+     * refreshes list 
+     */
+    public void orderScriptsBtn(){
        if (scriptList.getSelectedValue() != null){
            for (int i = 0; i < stock.size(); i++) {
                if(scriptList.getSelectedValue().contains(stock.get(i).getName())){
@@ -470,7 +510,14 @@ counter++;
        SecaddElementsToLists();
    }
    
-   public void givePrescription(){
+    /**
+     * checks if selected values are null
+     * if not, iterates through patient names for the selected name
+     * if their prescription contains what the secretary wants to give them
+     * gives them the prescription
+     * 
+     */
+    public void givePrescription(){
       String dosage = null;
        if (SecretaryPatientList.getSelectedValue() != null && scriptList.getSelectedValue() != null ){
            for (int i = 0; i < patients.size(); i++) {
@@ -491,20 +538,36 @@ counter++;
            }
        }
    }
-   public void saveNewMedicine(){
+
+    /**
+     *checks if input is not null
+     * if so, iterate through stock list
+     * if the elements name is equal to the input, breaks
+     * if the input is not found within the whole list
+     * creates a medicine from the input
+     */
+    public void saveNewMedicine(){
        if (newMedicineNameField.getText() != null && newMedicineDosageField.getText() != null){
            for (int i = 0; i < stock.size(); i++) {
                
            
            if( stock.get(i).getName().equals(newMedicineNameField.getText())){
-               System.out.println("Creating new script...");
-               stock.add(new MedicineClass(newMedicineNameField.getText() ,newMedicineDosageField.getText(), 0));
+               
+               break;
+               
            }
            
            else{
-               System.out.println("Contains the script already. Breaking...");} }}}
+               stock.add(new MedicineClass(newMedicineNameField.getText() ,newMedicineDosageField.getText(), 0));
+           }}}}
    
-  public void doctorPatientSelect(){
+    /**
+     * iterates through a list of patients and checks if each elements name parameter is equal to the selected value
+     * if it is, gets the patients history, age, name and notes
+     * if the patient has an appointment
+     * add it to a list
+     */
+    public void doctorPatientSelect(){
        for (int i = 0; i < patients.size(); i++) {
                   
                            if (patients.get(i).getName().equals(doctorPatientSelectBox.getSelectedValue()) ){
@@ -520,7 +583,11 @@ counter++;
        }}
    }
   
-  public void savePatientNotes(){
+    /**
+     * checks patient list for the selected value
+     * if it finds it, adds the input to its notes and history parameters
+     */
+    public void savePatientNotes(){
       
              for (int i = 0; i < patients.size(); i++) {
 
@@ -531,7 +598,12 @@ counter++;
                                  }
   }
   
-  public void drCreateApp(){
+    /**
+     *checks if selected values are null
+     * if not, gets the values of spinners and concatenates that as an appointment
+     * adds that to the current patients appointments
+     */
+    public void drCreateApp(){
       if (doctorPatientSelectBox.getSelectedValue() != null && drDaySpinner.getValue() != null && drMonthSpinner.getValue() != null && drYearSpinner.getValue() != null){
           String appointment = daySpinner.getValue() + " . " + monthSpinner.getValue() + " . " + yearSpinner.getValue() + " with " + doctorNameBox.getText();
           for (int i = 0; i < patients.size(); i++) {
@@ -544,14 +616,28 @@ counter++;
       }
   }
   
- public void removePatientAppointment(){
+    /**
+     * iterates through patient list
+     * if the patients appointment is equal to a value it removes that patients appointment
+     * removes element from list
+     */
+    public void removePatientAppointment(){
      for (int i = 0; i < patients.size(); i++) {
 if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedValue())){
-    patients.remove(i);
+    patients.get(i).setAppointment("");
     doctorAppointmentsBoxModel.removeElement(doctorAppointmentsBox.getSelectedValue());
 }
      }
  }
+    
+    
+   /**
+    *checks if inputs are null, if not iterates through patient list for the selected value
+    * once it finds it it sets that elements prescription to the input
+    * adds this to the patients history
+    * refreshes
+    */
+    
  
  private void assignPrescriptionBtn(){
      if (doctorPatientSelectBox.getSelectedValue() != null && toPrescribeList.getSelectedValue() != null){
@@ -565,6 +651,13 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
          }
      }
  }         
+ /**
+  * clears models
+  * checks if list already contains elements, if it does not it adds them
+  */
+ 
+ 
+ 
  private void SecaddElementsToLists(){
         secretaryPatientListModel.clear();
         stockQuantityListModel.clear();
@@ -577,6 +670,9 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                           scriptListModel.addElement(stock.get(j).getName());
                           stockQuantityListModel.addElement(stock.get(j).getStockLevel());
                       }}
+ 
+ 
+ 
 /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -590,7 +686,6 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
         mainPanel = new javax.swing.JTabbedPane();
         LoginPanel = new javax.swing.JPanel();
         usernameText = new javax.swing.JTextField();
-        passwordText = new javax.swing.JTextField();
         loginUserLabel = new javax.swing.JLabel();
         loginPassLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
@@ -598,6 +693,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
         roleList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         feedbackLabel = new javax.swing.JLabel();
+        passwordText = new javax.swing.JPasswordField();
         RegisterPanel = new javax.swing.JPanel();
         registerButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -772,12 +868,6 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
             }
         });
 
-        passwordText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTextActionPerformed(evt);
-            }
-        });
-
         loginUserLabel.setText("Username");
 
         loginPassLabel.setText("Password");
@@ -810,10 +900,10 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                     .addGroup(LoginPanelLayout.createSequentialGroup()
                         .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(usernameText, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(passwordText)
                             .addComponent(loginPassLabel)
-                            .addComponent(loginButton))
-                        .addGap(55, 55, 55)
+                            .addComponent(loginButton)
+                            .addComponent(passwordText))
+                        .addGap(40, 40, 40)
                         .addGroup(LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -835,9 +925,9 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                         .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(loginPassLabel)
-                        .addGap(18, 18, 18)
+                        .addGap(14, 14, 14)
                         .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(16, 16, 16)
                         .addComponent(loginButton)))
                 .addGap(63, 63, 63)
                 .addComponent(feedbackLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1162,7 +1252,6 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(DoctorPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(DoctorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel26)
                                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1991,10 +2080,6 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameTextActionPerformed
 
-    private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordTextActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         loginButtonOnClick();
@@ -2323,7 +2408,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
     private javax.swing.JTextField newMedicineDosageField;
     private javax.swing.JTextField newMedicineNameField;
     private javax.swing.JButton orderScripts;
-    private javax.swing.JTextField passwordText;
+    private javax.swing.JPasswordField passwordText;
     private javax.swing.JList<String> patientApprovalList;
     private javax.swing.JList<String> patientDoctorRatingList;
     private javax.swing.JSpinner patientDoctorRatingSpinner;

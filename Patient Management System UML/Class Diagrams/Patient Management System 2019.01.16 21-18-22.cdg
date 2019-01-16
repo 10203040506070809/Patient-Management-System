@@ -20,11 +20,15 @@
         <Field name="scriptListModel" type="DefaultListModel" visibility="package"/>
         <Field name="doctorPatientListModel" type="DefaultListModel" visibility="package"/>
         <Field name="doctorAppointmentsBoxModel" type="DefaultListModel" visibility="package"/>
+        <Field name="toPrescribeListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="appointmentRequestListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="stockQuantityListModel" type="DefaultListModel" visibility="package"/>
         <Field name="newPatient" type="PatientClass" visibility="package"/>
         <Field name="doctor" type="DoctorClass" visibility="package"/>
         <Field name="admin" type="AdminClass" visibility="package"/>
         <Field name="secretary" type="SecretaryClass" visibility="package"/>
         <Field name="counter" type="int" visibility="package"/>
+        <Field name="patientUserName" type="String" visibility="package"/>
         <Field name="AdministrationPanel" type="javax.swing.JPanel" visibility="private"/>
         <Field name="DoctorLabel" type="javax.swing.JLabel" visibility="private"/>
         <Field name="DoctorPanel" type="javax.swing.JPanel" visibility="private"/>
@@ -56,6 +60,7 @@
         <Field name="canvas1" type="java.awt.Canvas" visibility="private"/>
         <Field name="daySpinner" type="javax.swing.JSpinner" visibility="private"/>
         <Field name="doctorAppointmentsBox" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="doctorDosageField" type="javax.swing.JTextField" visibility="private"/>
         <Field name="doctorFeedback" type="javax.swing.JTextArea" visibility="private"/>
         <Field name="doctorFeedbackText" type="javax.swing.JTextArea" visibility="private"/>
         <Field name="doctorNameBox" type="javax.swing.JTextField" visibility="private"/>
@@ -124,7 +129,10 @@
         <Field name="jLabel45" type="javax.swing.JLabel" visibility="private"/>
         <Field name="jLabel46" type="javax.swing.JLabel" visibility="private"/>
         <Field name="jLabel47" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel48" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel49" type="javax.swing.JLabel" visibility="private"/>
         <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel50" type="javax.swing.JLabel" visibility="private"/>
         <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
         <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
         <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
@@ -142,6 +150,7 @@
         <Field name="jScrollPane19" type="javax.swing.JScrollPane" visibility="private"/>
         <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
         <Field name="jScrollPane20" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane21" type="javax.swing.JScrollPane" visibility="private"/>
         <Field name="jScrollPane3" type="javax.swing.JScrollPane" visibility="private"/>
         <Field name="jScrollPane4" type="javax.swing.JScrollPane" visibility="private"/>
         <Field name="jScrollPane5" type="javax.swing.JScrollPane" visibility="private"/>
@@ -161,7 +170,7 @@
         <Field name="newMedicineDosageField" type="javax.swing.JTextField" visibility="private"/>
         <Field name="newMedicineNameField" type="javax.swing.JTextField" visibility="private"/>
         <Field name="orderScripts" type="javax.swing.JButton" visibility="private"/>
-        <Field name="passwordText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="passwordText" type="javax.swing.JPasswordField" visibility="private"/>
         <Field name="patientApprovalList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
         <Field name="patientDoctorRatingList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
         <Field name="patientDoctorRatingSpinner" type="javax.swing.JSpinner" visibility="private"/>
@@ -185,6 +194,7 @@
         <Field name="scriptList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
         <Field name="secretaryNameBox" type="javax.swing.JTextField" visibility="private"/>
         <Field name="secretaryUserNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="stockQuantityList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
         <Field name="terminationApprovalButton" type="javax.swing.JButton" visibility="private"/>
         <Field name="terminationsList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
         <Field name="toPrescribeList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
@@ -222,12 +232,10 @@
         <Method name="savePatientNotes" returnType="void" visibility="public"/>
         <Method name="drCreateApp" returnType="void" visibility="public"/>
         <Method name="removePatientAppointment" returnType="void" visibility="public"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="assignPrescriptionBtn" returnType="void" visibility="private"/>
+        <Method name="SecaddElementsToLists" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="usernameTextActionPerformed" returnType="void" visibility="private">
-          <Argument type="java.awt.event.ActionEvent" name="evt"/>
-        </Method>
-        <Method name="passwordTextActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
         <Method name="loginButtonActionPerformed" returnType="void" visibility="private">
@@ -317,6 +325,9 @@ void" visibility="private"/>
         <Method name="removePatientAppointmentActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
+        <Method name="jButton10ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
         <Method name="main" returnType="void" visibility="public" isStatic="true">
           <Argument type="String" name="args"/>
         </Method>
@@ -348,18 +359,6 @@ void" visibility="private"/>
         </Constructor>
       </Constructors>
       <Methods>
-        <Method name="getUsername" returnType="String" visibility="public"/>
-        <Method name="setUsername" returnType="void" visibility="public">
-          <Argument type="String" name="username"/>
-        </Method>
-        <Method name="getPassword" returnType="String" visibility="public"/>
-        <Method name="setPassword" returnType="void" visibility="public">
-          <Argument type="String" name="password"/>
-        </Method>
-        <Method name="getName" returnType="String" visibility="public"/>
-        <Method name="setName" returnType="void" visibility="public">
-          <Argument type="String" name="name"/>
-        </Method>
         <Method name="getRating" returnType="int" visibility="public"/>
         <Method name="setRating" returnType="void" visibility="public">
           <Argument type="int" name="rating"/>
@@ -398,7 +397,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="PatientClass" package="patient.management.system" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="PatientClass" package="patient.management.system" visibility="public" xPosition="1115.0" yPosition="341.0">
       <Fields>
         <Field name="age" type="int" visibility="protected"/>
         <Field name="gender" type="String" visibility="protected"/>
@@ -498,19 +497,19 @@ void" visibility="private"/>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <IsRelation name="is" source="patient.management.system.AdminClass" target="patient.management.system.PersonClass"/>
     <IsRelation name="is" source="patient.management.system.PatientClass" target="patient.management.system.PersonClass"/>
+    <HasRelation name="doctor" source="patient.management.system.PatientManagementSystem" target="patient.management.system.DoctorClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="secretarys" source="patient.management.system.PatientManagementSystem" target="patient.management.system.SecretaryClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;SecretaryClass&gt;"/>
+    <HasRelation name="doctors" source="patient.management.system.PatientManagementSystem" target="patient.management.system.DoctorClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;DoctorClass&gt;"/>
+    <HasRelation name="newPatient" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="patient.management.system.DoctorClass" target="patient.management.system.PersonClass"/>
     <HasRelation name="admins" source="patient.management.system.PatientManagementSystem" target="patient.management.system.AdminClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AdminClass&gt;"/>
-    <HasRelation name="newPatients" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PatientClass&gt;"/>
-    <HasRelation name="secretary" source="patient.management.system.PatientManagementSystem" target="patient.management.system.SecretaryClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="stock" source="patient.management.system.PatientManagementSystem" target="patient.management.system.MedicineClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;MedicineClass&gt;"/>
     <HasRelation name="admin" source="patient.management.system.PatientManagementSystem" target="patient.management.system.AdminClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="patients" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PatientClass&gt;"/>
-    <HasRelation name="doctors" source="patient.management.system.PatientManagementSystem" target="patient.management.system.DoctorClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;DoctorClass&gt;"/>
-    <HasRelation name="doctor" source="patient.management.system.PatientManagementSystem" target="patient.management.system.DoctorClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="patient.management.system.DoctorClass" target="patient.management.system.PersonClass"/>
-    <HasRelation name="secretarys" source="patient.management.system.PatientManagementSystem" target="patient.management.system.SecretaryClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;SecretaryClass&gt;"/>
-    <HasRelation name="newPatient" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="newPatients" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PatientClass&gt;"/>
     <IsRelation name="is" source="patient.management.system.SecretaryClass" target="patient.management.system.PersonClass"/>
+    <IsRelation name="is" source="patient.management.system.AdminClass" target="patient.management.system.PersonClass"/>
+    <HasRelation name="secretary" source="patient.management.system.PatientManagementSystem" target="patient.management.system.SecretaryClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="patients" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PatientClass&gt;"/>
   </ClassDiagramRelations>
 </ClassDiagram>

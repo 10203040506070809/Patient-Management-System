@@ -12,38 +12,43 @@ package patient.management.system;
 public class PatientClass extends PersonClass {
     
     /**
-     *
+     * variable to store the patients age, taken at creation
      */
     protected int age;
 
     /**
-     *
+     * variable to store the patients gender, taken at creation
      */
     protected String gender;
 
     /**
-     *
+     * variable to store the patients notes, to be edited by a doctor during an appointment
      */
     protected String notes;
 
     /**
-     *
+     * variable to store the patients history, to be viewable by both the patient and their doctor
      */
     protected String history;
 
     /**
-     *
+     * a string to contain the current medications the patient is in possession of
      */
     protected String medicines;
 
     /**
-     *
+     * a string to contain the appointments the patient has 
      */
     protected String appointment;
 
+    
+    /**
+     * a string to contain the prescription the doctor has given them, to be shown to a secretary and be given medicines in return
+     */
+    
     protected String prescription;
      /* 
-   
+    parameters to be used in creation of a patient object
      *
      * @param username
      * @param password
@@ -55,6 +60,21 @@ public class PatientClass extends PersonClass {
      * @param medicines
      * @param appointment
      */
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @param name
+     * @param age
+     * @param gender
+     * @param notes
+     * @param history
+     * @param medicines
+     * @param appointment
+     * @param prescription
+     */
+
     public PatientClass(String username, String password, String name, int age, String gender, String notes, String history, String medicines, String appointment , String prescription)
 {
     //calls super class 
@@ -72,7 +92,7 @@ this.prescription = prescription;
 }
 
     /**
-     *
+     * getter for patient age
      * @return
      */
     public int getAge() {
@@ -80,7 +100,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * setter for patient age
      * @param age
      */
     public void setAge(int age) {
@@ -88,7 +108,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * getter for patient gender
      * @return
      */
     public String getGender() {
@@ -96,7 +116,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * setter for patient gender
      * @param gender
      */
     public void setGender(String gender) {
@@ -104,7 +124,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     *getter for patient notes
      * @return
      */
     public String getNotes() {
@@ -112,7 +132,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * setter for patient notes
      * @param notes
      */
     public void setNotes(String notes) {
@@ -120,7 +140,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * getter for patient history
      * @return
      */
     public String getHistory() {
@@ -128,7 +148,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * setter for patient history
      * @param history
      */
     public void setHistory(String history) {
@@ -136,7 +156,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * getter for patient medicines
      * @return
      */
     public String getMedicines() {
@@ -144,7 +164,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * setter for patient medicines
      * @param medicines
      */
     public void setMedicines(String medicines) {
@@ -152,7 +172,7 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * getter for patient appointments
      * @return
      */
     public String getAppointment() {
@@ -160,17 +180,25 @@ this.prescription = prescription;
     }
 
     /**
-     *
+     * setter for patient appointments
      * @param appointment
      */
     public void setAppointment(String appointment) {
         this.appointment = appointment;
     }
 
+    /**
+     *  getter for patient script
+     * @return 
+     */
+    
     public String getPrescription() {
         return prescription;
     }
-
+/**
+ *  setter for patient script
+ * @param prescription 
+ */
     public void setPrescription(String prescription) {
         this.prescription = prescription;
     }

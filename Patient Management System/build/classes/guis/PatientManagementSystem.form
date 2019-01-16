@@ -70,11 +70,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="usernameText" alignment="0" pref="98" max="32767" attributes="0"/>
-                                  <Component id="passwordText" alignment="0" max="32767" attributes="0"/>
                                   <Component id="loginPassLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="loginButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="passwordText" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" min="-2" pref="103" max="-2" attributes="0"/>
@@ -102,9 +102,9 @@
                               <Component id="usernameText" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="loginPassLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="passwordText" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Component id="loginButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -119,11 +119,6 @@
             <Component class="javax.swing.JTextField" name="usernameText">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameTextActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="passwordText">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordTextActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="loginUserLabel">
@@ -174,6 +169,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="feedbackLabel">
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="passwordText">
             </Component>
           </SubComponents>
         </Container>
@@ -465,7 +462,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                           <Component id="jScrollPane12" min="-2" pref="293" max="-2" attributes="0"/>

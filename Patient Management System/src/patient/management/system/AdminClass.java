@@ -9,17 +9,18 @@ package patient.management.system;
  *
  * @author jflet
  */
+
 public class AdminClass extends PersonClass{
 
     /**
-     *
-     * @param username
+     *takes in a username, password and name and creates an administrator from these
+     * @param username   
      * @param password
      * @param name
      */
     public AdminClass(String username, String password, String name)
 {
-    //calls super class 
+    
     
 this.username = username;
 this.password = password;

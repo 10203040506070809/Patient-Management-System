@@ -6,16 +6,16 @@
 package patient.management.system;
 
 /**
- *
+ *This is inherited from the person class and has no extra functionality to it. 
  * @author jflet
  */
 public class SecretaryClass extends PersonClass {
 
     /**
-     *
-     * @param username
-     * @param password
-     * @param name
+     *These are inherited from the person class and follow the same functionality;
+     * @param username - The secretaries username.
+     * @param password - The secretaries password.
+     * @param name - The secretaries name.
      */
     public SecretaryClass(String username, String password, String name)
 {
