@@ -61,6 +61,7 @@ public class PatientClass extends PersonClass {
   
 this.username = username;
 this.password = password;
+this.age = age;
 this.name = name;
 this.gender = gender;
 this.notes = notes;
