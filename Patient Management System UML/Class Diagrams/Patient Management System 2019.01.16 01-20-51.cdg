@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Patient Management System">
+  <ClassDiagramComponents>
+    <Class name="PatientManagementSystem" package="guis" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="currentUserName" type="String" visibility="package"/>
+        <Field name="patients" type="List&lt;PatientClass&gt;" visibility="package"/>
+        <Field name="newPatients" type="List&lt;PatientClass&gt;" visibility="package"/>
+        <Field name="doctors" type="List&lt;DoctorClass&gt;" visibility="package"/>
+        <Field name="admins" type="List&lt;AdminClass&gt;" visibility="package"/>
+        <Field name="secretarys" type="List&lt;SecretaryClass&gt;" visibility="package"/>
+        <Field name="stock" type="List&lt;MedicineClass&gt;" visibility="package"/>
+        <Field name="model" type="DefaultListModel" visibility="package"/>
+        <Field name="ratingList" type="DefaultListModel" visibility="package"/>
+        <Field name="terminationListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="adminDoctorListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="adminSecretaryListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="secretaryPatientListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="scriptListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="doctorPatientListModel" type="DefaultListModel" visibility="package"/>
+        <Field name="doctorAppointmentsBoxModel" type="DefaultListModel" visibility="package"/>
+        <Field name="newPatient" type="PatientClass" visibility="package"/>
+        <Field name="doctor" type="DoctorClass" visibility="package"/>
+        <Field name="admin" type="AdminClass" visibility="package"/>
+        <Field name="secretary" type="SecretaryClass" visibility="package"/>
+        <Field name="counter" type="int" visibility="package"/>
+        <Field name="AdministrationPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="DoctorLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="DoctorPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="LoginPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="PatientPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="RegisterPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="SecretaryLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="SecretaryPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="SecretaryPatientList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="adminAccountLister" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="adminConfirmNewAdmin" type="javax.swing.JButton" visibility="private"/>
+        <Field name="adminDoctorFeedbackBox" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="adminDoctorFeedbackButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="adminDoctorList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="adminDoctorRatingLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="adminDoctorsRemovalBtn" type="javax.swing.JButton" visibility="private"/>
+        <Field name="adminFeedbackLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="adminNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="adminNewNameText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="adminNewPasswordText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="adminSaveFeedback" type="javax.swing.JButton" visibility="private"/>
+        <Field name="adminSecretaryList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="adminSecretaryRemovalBtn" type="javax.swing.JButton" visibility="private"/>
+        <Field name="adminUserNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="appointmentRequestButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="appointmentRequestList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="appointmentText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="approvalButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="canvas1" type="java.awt.Canvas" visibility="private"/>
+        <Field name="daySpinner" type="javax.swing.JSpinner" visibility="private"/>
+        <Field name="doctorAppointmentsBox" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="doctorFeedback" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="doctorFeedbackText" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="doctorNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="doctorPatientAgeField" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="doctorPatientNameField" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="doctorPatientNotes" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="doctorPatientSelectBox" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="doctorRatingLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="doctorSelect" type="javax.swing.JButton" visibility="private"/>
+        <Field name="doctorUserNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="drDaySpinner" type="javax.swing.JSpinner" visibility="private"/>
+        <Field name="drMonthSpinner" type="javax.swing.JSpinner" visibility="private"/>
+        <Field name="drYearSpinner" type="javax.swing.JSpinner" visibility="private"/>
+        <Field name="feedbackLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="givePrescription" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton10" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton12" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton9" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel11" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel12" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel14" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel15" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel16" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel17" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel18" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel19" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel20" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel21" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel22" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel23" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel24" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel25" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel26" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel27" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel28" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel29" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel30" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel31" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel32" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel33" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel34" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel35" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel36" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel37" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel38" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel39" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel40" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel41" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel42" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel43" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel44" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel45" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel46" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel47" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane10" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane11" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane12" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane13" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane14" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane15" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane16" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane17" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane18" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane19" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane20" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane3" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane4" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane5" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane6" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane7" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane8" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane9" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="loginButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="loginPassLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="loginUserLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="mainPanel" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="monthSpinner" type="javax.swing.JSpinner" visibility="private"/>
+        <Field name="nameLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nameLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nameLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nameLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="newMedicineDosageField" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="newMedicineNameField" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="orderScripts" type="javax.swing.JButton" visibility="private"/>
+        <Field name="passwordText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="patientApprovalList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="patientDoctorRatingList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="patientDoctorRatingSpinner" type="javax.swing.JSpinner" visibility="private"/>
+        <Field name="patientFeedback" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="patientHistoryLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="patientHistoryText" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="patientHistoryTextBox" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="patientNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="patientUserNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="prescriptionText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="registerButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="registerDobText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="registerFeedbackLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="registerGenderList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="registerName" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="registerPassword" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="removePatientAppointment" type="javax.swing.JButton" visibility="private"/>
+        <Field name="roleList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="saveNewMedicine" type="javax.swing.JButton" visibility="private"/>
+        <Field name="savePatientNotes" type="javax.swing.JButton" visibility="private"/>
+        <Field name="scriptList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="secretaryNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="secretaryUserNameBox" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="terminationApprovalButton" type="javax.swing.JButton" visibility="private"/>
+        <Field name="terminationsList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="toPrescribeList" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="usernameLabel" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="usernameLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="usernameLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="usernameLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="usernameText" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="yearSpinner" type="javax.swing.JSpinner" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="loginButtonOnClick" returnType="void" visibility="private"/>
+        <Method name="registerOnClick" returnType="void" visibility="private"/>
+        <Method name="logOffButtonOnClick" returnType="void" visibility="private"/>
+        <Method name="approvePatient" returnType="void" visibility="private"/>
+        <Method name="doctorFeedbackSelect" returnType="void" visibility="private"/>
+        <Method name="confirmFeedback" returnType="void" visibility="private"/>
+        <Method name="requestAppointmentBtn" returnType="void" visibility="public"/>
+        <Method name="requestAccountTermination" returnType="void" visibility="public"/>
+        <Method name="terminateAccounts" returnType="void" visibility="public"/>
+        <Method name="removeDoctor" returnType="void" visibility="public"/>
+        <Method name="createAdmin" returnType="void" visibility="public"/>
+        <Method name="checkDoctorRating" returnType="void" visibility="public"/>
+        <Method name="secretaryRemovalBtn" returnType="void" visibility="public"/>
+        <Method name="saveDoctorFeedback" returnType="void" visibility="public"/>
+        <Method name="confirmApps" returnType="void" visibility="public"/>
+        <Method name="removePatient" returnType="void" visibility="public"/>
+        <Method name="orderScriptsBtn" returnType="void" visibility="public"/>
+        <Method name="givePrescription" returnType="void" visibility="public"/>
+        <Method name="saveNewMedicine" returnType="void" visibility="public"/>
+        <Method name="doctorPatientSelect" returnType="void" visibility="public"/>
+        <Method name="savePatientNotes" returnType="void" visibility="public"/>
+        <Method name="drCreateApp" returnType="void" visibility="public"/>
+        <Method name="removePatientAppointment" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="usernameTextActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="passwordTextActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="loginButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="registerButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="doctorSelectActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="appointmentRequestButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="prescriptionTextActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton12ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="terminationApprovalButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="approvalButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="secretaryUserNameBoxActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="adminSecretaryRemovalBtnActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="adminDoctorsRemovalBtnActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="adminConfirmNewAdminActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="adminDoctorFeedbackButtonActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="patientNameBoxActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="adminSaveFeedbackActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="orderScriptsActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="givePrescriptionActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="saveNewMedicineActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="savePatientNotesActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="removePatientAppointmentActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AdminClass" package="patient.management.system" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="DoctorClass" package="patient.management.system" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="rating" type="int" visibility="protected"/>
+        <Field name="feedback" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="rating"/>
+          <Argument type="String" name="feedback"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="setUsername" returnType="void" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getRating" returnType="int" visibility="public"/>
+        <Method name="setRating" returnType="void" visibility="public">
+          <Argument type="int" name="rating"/>
+        </Method>
+        <Method name="getFeedback" returnType="String" visibility="public"/>
+        <Method name="setFeedback" returnType="void" visibility="public">
+          <Argument type="String" name="feedback"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MedicineClass" package="patient.management.system" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="name" type="String" visibility="protected"/>
+        <Field name="dosage" type="String" visibility="protected"/>
+        <Field name="stockLevel" type="int" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="dosage"/>
+          <Argument type="int" name="stockLevel"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getDosage" returnType="String" visibility="public"/>
+        <Method name="setDosage" returnType="void" visibility="public">
+          <Argument type="String" name="dosage"/>
+        </Method>
+        <Method name="getStockLevel" returnType="int" visibility="public"/>
+        <Method name="setStockLevel" returnType="void" visibility="public">
+          <Argument type="int" name="stockLevel"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PatientClass" package="patient.management.system" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="age" type="int" visibility="protected"/>
+        <Field name="gender" type="String" visibility="protected"/>
+        <Field name="notes" type="String" visibility="protected"/>
+        <Field name="history" type="String" visibility="protected"/>
+        <Field name="medicines" type="String" visibility="protected"/>
+        <Field name="appointment" type="String" visibility="protected"/>
+        <Field name="prescription" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="age"/>
+          <Argument type="String" name="gender"/>
+          <Argument type="String" name="notes"/>
+          <Argument type="String" name="history"/>
+          <Argument type="String" name="medicines"/>
+          <Argument type="String" name="appointment"/>
+          <Argument type="String" name="prescription"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getAge" returnType="int" visibility="public"/>
+        <Method name="setAge" returnType="void" visibility="public">
+          <Argument type="int" name="age"/>
+        </Method>
+        <Method name="getGender" returnType="String" visibility="public"/>
+        <Method name="setGender" returnType="void" visibility="public">
+          <Argument type="String" name="gender"/>
+        </Method>
+        <Method name="getNotes" returnType="String" visibility="public"/>
+        <Method name="setNotes" returnType="void" visibility="public">
+          <Argument type="String" name="notes"/>
+        </Method>
+        <Method name="getHistory" returnType="String" visibility="public"/>
+        <Method name="setHistory" returnType="void" visibility="public">
+          <Argument type="String" name="history"/>
+        </Method>
+        <Method name="getMedicines" returnType="String" visibility="public"/>
+        <Method name="setMedicines" returnType="void" visibility="public">
+          <Argument type="String" name="medicines"/>
+        </Method>
+        <Method name="getAppointment" returnType="String" visibility="public"/>
+        <Method name="setAppointment" returnType="void" visibility="public">
+          <Argument type="String" name="appointment"/>
+        </Method>
+        <Method name="getPrescription" returnType="String" visibility="public"/>
+        <Method name="setPrescription" returnType="void" visibility="public">
+          <Argument type="String" name="prescription"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PatientManagementSystem" package="patient.management.system" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PersonClass" package="patient.management.system" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="username" type="String" visibility="protected"/>
+        <Field name="password" type="String" visibility="protected"/>
+        <Field name="name" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="setUsername" returnType="void" visibility="public">
+          <Argument type="String" name="username"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="SecretaryClass" package="patient.management.system" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="username"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="patient.management.system.AdminClass" target="patient.management.system.PersonClass"/>
+    <IsRelation name="is" source="patient.management.system.PatientClass" target="patient.management.system.PersonClass"/>
+    <HasRelation name="admins" source="patient.management.system.PatientManagementSystem" target="patient.management.system.AdminClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;AdminClass&gt;"/>
+    <HasRelation name="newPatients" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PatientClass&gt;"/>
+    <HasRelation name="secretary" source="patient.management.system.PatientManagementSystem" target="patient.management.system.SecretaryClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="stock" source="patient.management.system.PatientManagementSystem" target="patient.management.system.MedicineClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;MedicineClass&gt;"/>
+    <HasRelation name="admin" source="patient.management.system.PatientManagementSystem" target="patient.management.system.AdminClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="patients" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PatientClass&gt;"/>
+    <HasRelation name="doctors" source="patient.management.system.PatientManagementSystem" target="patient.management.system.DoctorClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;DoctorClass&gt;"/>
+    <HasRelation name="doctor" source="patient.management.system.PatientManagementSystem" target="patient.management.system.DoctorClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="patient.management.system.DoctorClass" target="patient.management.system.PersonClass"/>
+    <HasRelation name="secretarys" source="patient.management.system.PatientManagementSystem" target="patient.management.system.SecretaryClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;SecretaryClass&gt;"/>
+    <HasRelation name="newPatient" source="patient.management.system.PatientManagementSystem" target="patient.management.system.PatientClass" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="patient.management.system.SecretaryClass" target="patient.management.system.PersonClass"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

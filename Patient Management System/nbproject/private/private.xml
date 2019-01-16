@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/patient/management/system/DoctorClass.java</file>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/patient/management/system/AdminClass.java</file>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/patient/management/system/PatientManagementSystem.java</file>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/guis/PatientManagementSystem.java</file>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/patient/management/system/SecretaryClass.java</file>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/patient/management/system/PatientClass.java</file>
-            <file>file:/C:/Users/jflet/Documents/Bitbucket/soft252/Week04/Patient%20Management%20System/src/patient/management/system/PersonClass.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/test/guis/PatientManagementSystemTest.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/patient/management/system/SecretaryClass.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/patient/management/system/DoctorClass.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/guis/PatientManagementSystem.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/patient/management/system/PersonClass.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/patient/management/system/PatientClass.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/patient/management/system/MedicineClass.java</file>
+            <file>file:/C:/Users/jflet/Documents/GitHub/Patient-Management-System/Patient%20Management%20System/src/patient/management/system/AdminClass.java</file>
         </group>
     </open-files>
 </project-private>
