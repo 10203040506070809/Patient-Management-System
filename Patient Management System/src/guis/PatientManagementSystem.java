@@ -31,6 +31,7 @@ public class PatientManagementSystem extends javax.swing.JFrame {
     DefaultListModel doctorAppointmentsBoxModel = new DefaultListModel();
     DefaultListModel toPrescribeListModel = new DefaultListModel();
     DefaultListModel appointmentRequestListModel = new DefaultListModel();
+    DefaultListModel stockQuantityListModel = new DefaultListModel();
 PatientClass newPatient;
  DoctorClass doctor;
  AdminClass admin;
@@ -55,6 +56,7 @@ PatientClass newPatient;
         doctorAppointmentsBox.setModel(doctorAppointmentsBoxModel);
         toPrescribeList.setModel(toPrescribeListModel);
         appointmentRequestList.setModel(appointmentRequestListModel);
+        stockQuantityList.setModel(stockQuantityListModel);
 logOffButtonOnClick();
 
 
@@ -465,7 +467,7 @@ counter++;
            }
            }
        }
-       
+       SecaddElementsToLists();
    }
    
    public void givePrescription(){
@@ -478,10 +480,13 @@ counter++;
                      for (int j = 0; j < stock.size(); j++) {
                          if (stock.get(j).getName().equals(scriptList.getSelectedValue())){
                              dosage = stock.get(j).getDosage();
+                             stock.get(j).setStockLevel(stock.get(j).getStockLevel() - 1);
+                             SecaddElementsToLists();
                          }
                      }
                    patients.get(i).setMedicines(patients.get(i).getMedicines() + scriptList.getSelectedValue() + " " + dosage);
                System.out.println("Added medicine to patient: " + patients.get(i).getMedicines());
+              
            }}
            }
        }
@@ -562,6 +567,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
  }         
  private void SecaddElementsToLists(){
         secretaryPatientListModel.clear();
+        stockQuantityListModel.clear();
                                scriptListModel.clear();
                            for (int i = 0; i < patients.size(); i++) {
                             
@@ -569,6 +575,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                  secretaryPatientListModel.addElement(patients.get(i).getName());}}
                       for (int j = 0; j <stock.size(); j++) {
                           scriptListModel.addElement(stock.get(j).getName());
+                          stockQuantityListModel.addElement(stock.get(j).getStockLevel());
                       }}
 /**
      * This method is called from within the constructor to initialise the form.
@@ -685,6 +692,9 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
         jScrollPane18 = new javax.swing.JScrollPane();
         SecretaryPatientList = new javax.swing.JList<>();
         orderScripts = new javax.swing.JButton();
+        jLabel50 = new javax.swing.JLabel();
+        jScrollPane21 = new javax.swing.JScrollPane();
+        stockQuantityList = new javax.swing.JList<>();
         PatientPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1354,6 +1364,11 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
             }
         });
 
+        jLabel50.setText("Stock");
+
+        stockQuantityList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane21.setViewportView(stockQuantityList);
+
         javax.swing.GroupLayout SecretaryPanelLayout = new javax.swing.GroupLayout(SecretaryPanel);
         SecretaryPanel.setLayout(SecretaryPanelLayout);
         SecretaryPanelLayout.setHorizontalGroup(
@@ -1362,36 +1377,38 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                 .addGap(23, 23, 23)
                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel34)
+                                    .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(usernameLabel2))
+                                .addGap(135, 135, 135)
+                                .addComponent(jLabel3)
+                                .addGap(69, 69, 69)
+                                .addComponent(jLabel50))
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                        .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel34)
-                                            .addComponent(secretaryUserNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(usernameLabel2))
-                                        .addGap(114, 114, 114))
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(givePrescription)
+                                        .addComponent(jButton4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(orderScripts))
-                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jLabel3))))
-                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(givePrescription))
+                                    .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SecretaryPanelLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(orderScripts))
+                                    .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                                 .addGap(50, 50, 50))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -1410,7 +1427,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(approvalButton))
                                     .addComponent(jLabel4))
-                                .addGap(0, 56, Short.MAX_VALUE))
+                                .addGap(0, 37, Short.MAX_VALUE))
                             .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1441,7 +1458,9 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel3)))
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel50))))
                         .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addGap(13, 13, 13)
@@ -1462,9 +1481,11 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
                             .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(jScrollPane18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecretaryPanelLayout.createSequentialGroup()
+                            .addGroup(SecretaryPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane5))))
+                                .addGroup(SecretaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane21)
+                                    .addComponent(jScrollPane5)))))
                     .addGroup(SecretaryPanelLayout.createSequentialGroup()
                         .addGap(197, 197, 197)
                         .addComponent(jLabel5)
@@ -2264,6 +2285,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2281,6 +2303,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane20;
+    private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -2324,6 +2347,7 @@ if (patients.get(i).getAppointment().equals(doctorAppointmentsBox.getSelectedVal
     private javax.swing.JList<String> scriptList;
     private javax.swing.JTextField secretaryNameBox;
     private javax.swing.JTextField secretaryUserNameBox;
+    private javax.swing.JList<String> stockQuantityList;
     private javax.swing.JButton terminationApprovalButton;
     private javax.swing.JList<String> terminationsList;
     private javax.swing.JList<String> toPrescribeList;
